@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "319749469938",
+    "firebase_url": "https://diarium-9317f.firebaseio.com",
+    "project_id": "diarium-9317f",
+    "storage_bucket": "diarium-9317f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:319749469938:android:4acce7de3f6ccdf7",
+        "android_client_info": {
+          "package_name": "id.co.telkomsigma.Diarium"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "319749469938-u4tumnaodi8rchpg3s3m9nne206fus79.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.co.telkomsigma.Diarium",
+            "certificate_hash": "e8b8a8d89415d48ca9dbeda994fd2c732b55f38d"
+          }
+        },
+        {
+          "client_id": "319749469938-af94crcg462c7mikmsienhp2tfe8hm3l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSjAWxQx0j1Ze3hhNB5Hp7AszLHX7uAQ4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "319749469938-af94crcg462c7mikmsienhp2tfe8hm3l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "319749469938-9hcqg93h6ifu92oaookni7vvhc1iub42.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "id.co.telkomsigma.Diarium"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
