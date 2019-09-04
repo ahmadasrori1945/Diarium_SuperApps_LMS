@@ -70,7 +70,7 @@ import id.co.telkomsigma.Diarium.util.UpdaterApps;
 import id.co.telkomsigma.Diarium.util.UserSessionManager;
 import id.co.telkomsigma.Diarium.util.element.ProgressDialogHelper;
 import io.nlopez.smartlocation.SmartLocation;
- 
+
 
 public class HomeActivity extends AppCompatActivity {
 

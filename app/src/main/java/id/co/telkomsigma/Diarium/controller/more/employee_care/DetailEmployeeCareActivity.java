@@ -154,6 +154,7 @@ public class DetailEmployeeCareActivity extends AppCompatActivity {
             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     // Do nothing but close the dialog
+                    submitPost(ticket);
                     Toast.makeText(DetailEmployeeCareActivity.this, "Selesai", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -170,6 +171,49 @@ public class DetailEmployeeCareActivity extends AppCompatActivity {
             finish();
         }
         return true;
+    }
+
+    private void submitPost(String tiket) {
+        progressDialogHelper.showProgressDialog(DetailEmployeeCareActivity.this, "Sending data...");
+
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat tgl = new SimpleDateFormat("yyyy-MM-dd");
+        String tRes = tgl.format(new Date());
+
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat jam = new SimpleDateFormat("HH:mm");
+        String jamRes = jam.format(new Date());
+        AndroidNetworking.upload(session.getServerURL()+"users/employeeCare/updateEmployeeCare/nik/"+session.getUserNIK()+"/buscd/"+session.getUserBusinessCode()+"/tiket/"+tiket)
+                .addHeaders("Accept","application/json")
+                .addHeaders("Content-Type","application/json")
+                .addHeaders("Authorization",session.getToken())
+                .addMultipartParameter("problem_status","03")
+                .addMultipartParameter("change_user",session.getUserNIK())
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // do anything with response
+                        System.out.println(response+"RESPONSUBMITNEWCARE");
+                        try {
+                            if(response.getInt("status")==200){
+                                Toast.makeText(DetailEmployeeCareActivity.this, "Thank for your response", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }else {
+                                Toast.makeText(DetailEmployeeCareActivity.this,"Error!",Toast.LENGTH_SHORT).show();
+                            }
+                            progressDialogHelper.dismissProgressDialog(DetailEmployeeCareActivity.this);
+                        }catch (Exception e){
+                            progressDialogHelper.dismissProgressDialog(DetailEmployeeCareActivity.this);
+                            System.out.println("bbb"+e);
+                        }
+                    }
+                    @Override
+
+                    public void onError(ANError error) {
+                        progressDialogHelper.dismissProgressDialog(DetailEmployeeCareActivity.this);
+                        System.out.println("ccc"+error);
+                    }
+                });
     }
 
     @Override
