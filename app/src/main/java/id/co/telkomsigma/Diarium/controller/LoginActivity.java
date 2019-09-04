@@ -169,7 +169,6 @@ public class LoginActivity extends AppCompatActivity {
 
         if(session.isLogin()){
             Intent i = new Intent(LoginActivity.this, HomeActivity.class);
-            i.putExtra("key", "none");
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
@@ -230,7 +229,6 @@ public class LoginActivity extends AppCompatActivity {
                         session.setFMResult(Activity.RESULT_CANCELED);
                         session.setLoginState(true);
                         Intent i = new Intent(LoginActivity.this, HomeActivity.class);
-                        i.putExtra("key", "none");
                         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(i);
@@ -276,7 +274,6 @@ public class LoginActivity extends AppCompatActivity {
                         session.setFMResult(Activity.RESULT_CANCELED);
                         session.setLoginState(true);
                         Intent i = new Intent(LoginActivity.this, HomeActivity.class);
-                        i.putExtra("key", "none");
                         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(i);
@@ -492,7 +489,6 @@ public class LoginActivity extends AppCompatActivity {
 
                                 session.setLoginState(true);
                                 Intent i = new Intent(LoginActivity.this, HomeActivity.class);
-                                i.putExtra("key", "none");
                                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(i);

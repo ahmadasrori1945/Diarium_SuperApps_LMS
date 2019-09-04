@@ -620,8 +620,6 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp(){
         Intent i = new Intent(ProfileActivity.this, HomeActivity.class);
-        i.putExtra("key","jj" +
-                "");
         startActivity(i);
         return true;
     }

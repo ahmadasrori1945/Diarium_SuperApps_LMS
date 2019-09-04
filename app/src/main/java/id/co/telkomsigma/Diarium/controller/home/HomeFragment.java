@@ -57,6 +57,7 @@ import id.co.telkomsigma.Diarium.adapter.MenuAdapter;
 import id.co.telkomsigma.Diarium.adapter.MyPostingAdapter;
 import id.co.telkomsigma.Diarium.controller.HomeActivity;
 import id.co.telkomsigma.Diarium.controller.inbox.DetailInboxActivity;
+import id.co.telkomsigma.Diarium.controller.inbox.InboxActivity;
 import id.co.telkomsigma.Diarium.controller.more.community.CommunityActivity;
 import id.co.telkomsigma.Diarium.controller.more.employee_care.EmployeeCareActivity;
 import id.co.telkomsigma.Diarium.controller.more.employee_corner.EmployeeCornerActivity;
@@ -212,8 +213,8 @@ public class HomeFragment extends Fragment {
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), HomeActivity.class);
-                i.putExtra("key", "moreinbox");
+                Intent i = new Intent(getActivity(), InboxActivity.class);
+//                i.putExtra("key", "moreinbox");
                 startActivity(i);
             }
         });
