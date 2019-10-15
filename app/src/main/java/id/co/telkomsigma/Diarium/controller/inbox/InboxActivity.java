@@ -1,10 +1,14 @@
 package id.co.telkomsigma.Diarium.controller.inbox;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,14 +28,13 @@ import java.util.List;
 
 import id.co.telkomsigma.Diarium.R;
 import id.co.telkomsigma.Diarium.adapter.InboxAdapter;
+import id.co.telkomsigma.Diarium.controller.LoginActivity;
 import id.co.telkomsigma.Diarium.model.InboxModel;
 import id.co.telkomsigma.Diarium.util.UserSessionManager;
 import id.co.telkomsigma.Diarium.util.element.ProgressDialogHelper;
 
 
 public class InboxActivity extends AppCompatActivity {
-
-    Typeface font,fontbold;
     UserSessionManager session;
     private ProgressDialogHelper progressDialogHelper;
     private List<InboxModel> listModel;
@@ -39,25 +42,23 @@ public class InboxActivity extends AppCompatActivity {
     private InboxAdapter adapter;
     ListView listInbox;
     private TextView tvNull;
-
+    Typeface font,fontbold;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inbox);
+        font = Typeface.createFromAsset(getApplication().getAssets(),"fonts/Nexa Light.otf");
+        fontbold = Typeface.createFromAsset(getApplication().getAssets(),"fonts/Nexa Bold.otf");
 
-        session = new UserSessionManager(InboxActivity.this);
+        session = new UserSessionManager(this);
         progressDialogHelper = new ProgressDialogHelper();
-
-        font = Typeface.createFromAsset(InboxActivity.this.getAssets(),"fonts/Nexa Light.otf");
-        fontbold = Typeface.createFromAsset(InboxActivity.this.getAssets(),"fonts/Nexa Bold.otf");
         tvNull = findViewById(R.id.tvNull);
         listInbox = findViewById(R.id.list_inbox);
 
         getInbox();
-
+        getSupportActionBar().setTitle("Inbox");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
-
 
     private void getInbox(){
         progressDialogHelper.showProgressDialog(InboxActivity.this, "Getting data...");
@@ -120,6 +121,7 @@ public class InboxActivity extends AppCompatActivity {
                                 }
                                 progressDialogHelper.dismissProgressDialog(InboxActivity.this);
                             }else{
+                                popUpLogin();
                                 progressDialogHelper.dismissProgressDialog(InboxActivity.this);
 
                             }
@@ -137,6 +139,31 @@ public class InboxActivity extends AppCompatActivity {
                         System.out.println(error);
                     }
                 });
+    }
+
+    private void popUpLogin() {
+        final Dialog dialog = new Dialog(InboxActivity.this);
+        dialog.setContentView(R.layout.layout_session_end);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.gravity = Gravity.CENTER;
+        dialog.getWindow().setAttributes(lp);
+        dialog.setTitle("Input Code Here");
+        Button btnYes =(Button) dialog.findViewById(R.id.btnYes);
+        dialog.show();
+        dialog.setCancelable(false);
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                session.setLoginState(false);
+                Intent i = new Intent(InboxActivity.this, LoginActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(i);
+            }
+        });
     }
 
     @Override

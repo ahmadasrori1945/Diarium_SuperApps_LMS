@@ -1,7 +1,6 @@
 package id.co.telkomsigma.Diarium.controller.home;
 
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -23,6 +22,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -55,16 +55,24 @@ import java.util.List;
 import id.co.telkomsigma.Diarium.adapter.InboxAdapter;
 import id.co.telkomsigma.Diarium.adapter.MenuAdapter;
 import id.co.telkomsigma.Diarium.adapter.MyPostingAdapter;
+import id.co.telkomsigma.Diarium.controller.HomeActivity;
 import id.co.telkomsigma.Diarium.controller.inbox.DetailInboxActivity;
-import id.co.telkomsigma.Diarium.controller.inbox.InboxActivity;
-import id.co.telkomsigma.Diarium.controller.home.main_menu.community.CommunityActivity;
-import id.co.telkomsigma.Diarium.controller.home.main_menu.employee_care.EmployeeCareActivity;
-import id.co.telkomsigma.Diarium.controller.home.main_menu.hr_wiki.HRWikiActivity;
-import id.co.telkomsigma.Diarium.controller.home.main_menu.search_partner.SearchTempActivity;
-import id.co.telkomsigma.Diarium.controller.home.main_menu.survey.SurveyActivity;
+import id.co.telkomsigma.Diarium.controller.more.community.CommunityActivity;
+import id.co.telkomsigma.Diarium.controller.more.employee_care.EmployeeCareActivity;
+import id.co.telkomsigma.Diarium.controller.more.employee_corner.EmployeeCornerActivity;
+import id.co.telkomsigma.Diarium.controller.more.hr_wiki.HRWikiActivity;
+import id.co.telkomsigma.Diarium.controller.more.onehseet.OneSheetActivity;
+import id.co.telkomsigma.Diarium.controller.more.personal_data.PersonalDataActivity;
+import id.co.telkomsigma.Diarium.controller.more.checkin.CheckinActivity;
+import id.co.telkomsigma.Diarium.controller.more.myevent.MyEventActivity;
+import id.co.telkomsigma.Diarium.controller.more.search_partner.SearchTempActivity;
+import id.co.telkomsigma.Diarium.controller.more.survey.SurveyActivity;
 import id.co.telkomsigma.Diarium.controller.profile.DetailpostActivity;
+import id.co.telkomsigma.Diarium.controller.more.myteam.MyTeamActivity;
 import id.co.telkomsigma.Diarium.controller.profile.ProfileActivity;
 import id.co.telkomsigma.Diarium.R;
+import id.co.telkomsigma.Diarium.controller.more.report.ReportActivity;
+import id.co.telkomsigma.Diarium.controller.more.today_activity.TodayActivity;
 import id.co.telkomsigma.Diarium.model.InboxModel;
 import id.co.telkomsigma.Diarium.model.MyPostingModel;
 import id.co.telkomsigma.Diarium.util.ExpandableHeightGridView;
@@ -121,68 +129,91 @@ public class HomeFragment extends Fragment {
     public HomeFragment() {
         // Required empty public constructor
     }
-    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         session = new UserSessionManager(getActivity());
+//        Toast.makeText(getActivity(), "status : "+session.getStat(), Toast.LENGTH_SHORT).show();
         progressDialog = new ProgressDialog(getActivity());
+
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-//        ========================================================================================== SUPERAPPS
         font = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Nexa Light.otf");
         fontbold = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Nexa Bold.otf");
-        lvInbox = view.findViewById(R.id.lvInbox);
-        lvPost = view.findViewById(R.id.lvPost);
+        lvInbox = (ListView) view.findViewById(R.id.lvInbox);
+        lvPost = (ListView) view.findViewById(R.id.lvPost);
         gridView = view.findViewById(R.id.gridview);
-        tvName = view.findViewById(R.id.tvTitle);
-        tvNullInbox = view.findViewById(R.id.tvNullInbox);
-        tvNullPost = view.findViewById(R.id.tvNullPost);
-        etSearch = view.findViewById(R.id.inputSearch);
-        TextView a1 = view.findViewById(R.id.judulsub);
-        TextView b1 = view.findViewById(R.id.judulsub2);
-        TextView more = view.findViewById(R.id.moreinbox);
+
         MenuAdapter gridAdapter = new MenuAdapter(getActivity(),image,menu);
         gridView.setAdapter(gridAdapter);
         gridView.setExpanded(true);
-        ivProfile= view.findViewById(R.id.ivProfile);
-        if (session.getAvatar().isEmpty()) {
-            ivProfile.setImageResource(R.drawable.profile);
-        } else{
-            Picasso.get().load(session.getAvatar()).error(R.drawable.profile).into(ivProfile);
-        }
-        TextView a = view.findViewById(R.id.tvGreeting);
+        ivProfile= (ImageView) view.findViewById(R.id.ivProfile);
+        Picasso.get().load(session.getAvatar()).error(R.drawable.profile).into(ivProfile);
+
+        TextView a = (TextView) view.findViewById(R.id.tvGreeting);
         a.setTypeface(fontbold);
         Calendar c = Calendar.getInstance();
         int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+
         if(timeOfDay >= 0 && timeOfDay < 12){
             a.setText("Good Morning");
+//            Toast.makeText(this, "Good Morning", Toast.LENGTH_SHORT).show();
         }else if(timeOfDay >= 12 && timeOfDay < 16){
             a.setText("Good Afternoon");
+//            Toast.makeText(this, "Good Afternoon", Toast.LENGTH_SHORT).show();
         }else if(timeOfDay >= 16 && timeOfDay < 21){
             a.setText("Good Evening");
+//            Toast.makeText(this, "Good Evening", Toast.LENGTH_SHORT).show();
         }else if(timeOfDay >= 21 && timeOfDay < 24){
             a.setText("Good Night");
+//            Toast.makeText(this, "Good Night", Toast.LENGTH_SHORT).show();
         }
+        tvName = (TextView) view.findViewById(R.id.tvTitle);
+        tvNullInbox = (TextView) view.findViewById(R.id.tvNullInbox);
+        tvNullPost = (TextView) view.findViewById(R.id.tvNullPost);
+
+        etSearch = (EditText) view.findViewById(R.id.inputSearch);
         tvName.setTypeface(fontbold);
         tvName.setText(session.getUserFullName());
+
+        TextView a1 = (TextView) view.findViewById(R.id.judulsub);
         a1.setTypeface(fontbold);
+        TextView b1 = (TextView) view.findViewById(R.id.judulsub2);
         b1.setTypeface(fontbold);
+
+//        menu_checkin = (TextView) view.findViewById(R.id.menu1);
+//        menu_checkin.setTypeface(fontbold);
         getStatCheckin();
         System.out.println(session.getStat()+"Status ABSENYA");
+//        if (session.getStat().equals("CO")||session.getStat().equals("OO")) {
+////            Toast.makeText(getActivity(), "Saatnya Checkin", Toast.LENGTH_SHORT).show();
+//            menu_checkin.setText("Check In");
+//        } else {
+////            Toast.makeText(getActivity(), "Saatnya Checkout", Toast.LENGTH_SHORT).show();
+//            menu_checkin.setText("Check Out");
+//        }
+//        if (session.getStat().equals("CO")||session.getStat().equals("OO")) {
+//            menu_checkin.setText("Check In");
+//        } else {
+//            menu_checkin.setText("Check Out");
+//        }
         SimpleDateFormat timeStampFormat = new SimpleDateFormat("MM-dd");
         Date myDate = new Date();
         System.out.println(session.getBornDate()+"BORNDATENYA");
         String currentDate = timeStampFormat.format(myDate);
         System.out.println(currentDate+"CURRENTDATENYA");
+//        String currentDate = "09-24";
         if (currentDate.equals(session.getBornDate()) && session.getStatusClickBornDate().equals("0")) {
             popupBirthday();
         }
+
+        TextView more = (TextView) view.findViewById(R.id.moreinbox);
         more.setTypeface(fontbold);
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), InboxActivity.class);
+                Intent i = new Intent(getActivity(), HomeActivity.class);
+                i.putExtra("key", "moreinbox");
                 startActivity(i);
             }
         });
@@ -195,6 +226,9 @@ public class HomeFragment extends Fragment {
                 startActivity(hariian);
             }
         });
+
+
+
         LinearLayout set = view.findViewById(R.id.profile);
         set.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -205,6 +239,7 @@ public class HomeFragment extends Fragment {
                 startActivity(hariian);
             }
         });
+
         etSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -212,6 +247,7 @@ public class HomeFragment extends Fragment {
                 startActivity(i);
             }
         });
+
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -287,158 +323,9 @@ public class HomeFragment extends Fragment {
             }
         });
 
-//        //========================================================================================== ONSALE
-//        font = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Nexa Light.otf");
-//        fontbold = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Nexa Bold.otf");
-//        lvInbox = view.findViewById(R.id.lvInbox);
-//        lvPost = view.findViewById(R.id.lvPost);
-//        ivProfile= view.findViewById(R.id.ivProfile);
-//        TextView a = view.findViewById(R.id.tvGreeting);
-//        tvName = view.findViewById(R.id.tvTitle);
-//        tvNullInbox = view.findViewById(R.id.tvNullInbox);
-//        tvNullPost = view.findViewById(R.id.tvNullPost);
-//        etSearch = view.findViewById(R.id.inputSearch);
-//        TextView a1 = view.findViewById(R.id.judulsub);
-//        TextView b1 = view.findViewById(R.id.judulsub2);
-//        menu_checkin = view.findViewById(R.id.menu1);
-//        TextView menu_b = view.findViewById(R.id.menu2);
-//        TextView menu_c = view.findViewById(R.id.menu3);
-//        TextView menu_d = view.findViewById(R.id.menu4);
-//        TextView menu_e = view.findViewById(R.id.menu5);
-//        TextView more = view.findViewById(R.id.moreinbox);
-//        Picasso.get().load(session.getAvatar()).error(R.drawable.profile).into(ivProfile);
-//        a.setTypeface(fontbold);
-//        Calendar c = Calendar.getInstance();
-//        int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
-//        if(timeOfDay >= 0 && timeOfDay < 12){
-//            a.setText("Good Morning");
-//        }else if(timeOfDay >= 12 && timeOfDay < 16){
-//            a.setText("Good Afternoon");
-//        }else if(timeOfDay >= 16 && timeOfDay < 21){
-//            a.setText("Good Evening");
-//        }else if(timeOfDay >= 21 && timeOfDay < 24){
-//            a.setText("Good Night");
-//        }
-//        tvName.setTypeface(fontbold);
-//        tvName.setText(session.getUserFullName());
-//        a1.setTypeface(fontbold);
-//        b1.setTypeface(fontbold);
-//        menu_checkin.setTypeface(fontbold);
-//        getStatCheckin();
-//        System.out.println(session.getStat()+"Status ABSENYA");
-//        if (session.getStat().equals("CO")||session.getStat().equals("OO")) {
-//            menu_checkin.setText("Check In");
-//        } else {
-//            menu_checkin.setText("Check Out");
-//        }
-//        SimpleDateFormat timeStampFormat = new SimpleDateFormat("MM-dd");
-//        Date myDate = new Date();
-//        System.out.println(session.getBornDate()+"BORNDATENYA");
-//        String currentDate = timeStampFormat.format(myDate);
-//        System.out.println(currentDate+"CURRENTDATENYA");
-//        if (currentDate.equals(session.getBornDate()) && session.getStatusClickBornDate().equals("0")) {
-//            popupBirthday();
-//        }
-//        menu_b.setTypeface(fontbold);
-//        menu_c.setTypeface(fontbold);
-//        menu_d.setTypeface(fontbold);
-//        menu_e.setTypeface(fontbold);
-//        more.setTypeface(fontbold);
-//        more.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(getActivity(), InboxActivity.class);
-//                startActivity(i);
-//            }
-//        });
-//        TextView more1= view.findViewById(R.id.morepost);
-//        more1.setTypeface(fontbold);
-//        more1.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//                Intent hariian = new Intent(getActivity(), EmployeePostingActivity.class);
-//                startActivity(hariian);
-//            }
-//        });
-//
-//        LinearLayout set = view.findViewById(R.id.profile);
-//        set.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//                Intent hariian = new Intent(getActivity(), ProfileActivity.class);
-//                hariian.putExtra("personal_number", session.getUserNIK());
-//                hariian.putExtra("avatar", session.getAvatar());
-//                startActivity(hariian);
-//            }
-//        });
-//
-//        LinearLayout menu1 = view.findViewById(R.id.menu_1);
-//        menu1.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//                Intent hariian = new Intent(getActivity(), CheckinActivity.class);
-//                startActivity(hariian);
-//            }
-//        });
-//
-//        LinearLayout menu2 = view.findViewById(R.id.menu_2);
-//        menu2.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//                Intent hariian = new Intent(getActivity(), TodayActivity.class);
-//                hariian.putExtra("personal_number",session.getUserNIK());
-//                hariian.putExtra("name",session.getUserFullName());
-//                hariian.putExtra("status","none");
-//                hariian.putExtra("position",session.getJob());
-//                hariian.putExtra("avatar",session.getAvatar());
-//                startActivity(hariian);
-//            }
-//        });
-//        LinearLayout menu3 = view.findViewById(R.id.menu_3);
-//        menu3.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//                Intent hariian = new Intent(getActivity(), ReportActivity.class);
-//                startActivity(hariian);
-//            }
-//        });
-//        LinearLayout menu4 = view.findViewById(R.id.menu_4);
-//        menu4.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//                Intent hariian = new Intent(getActivity(), PersonalDataActivity.class);
-//                startActivity(hariian);
-//            }
-//        });
-//        LinearLayout menu5 = view.findViewById(R.id.menu_5);
-//        menu5.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//                Intent hariian = new Intent(getActivity(), MyTeamActivity.class);
-//                startActivity(hariian);
-//            }
-//        });
-//        LinearLayout menu6 = view.findViewById(R.id.menu_6);
-//        menu6.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//                Intent hariian = new Intent(getActivity(), MyEventActivity.class);
-//                startActivity(hariian);
-//            }
-//        });
-//        etSearch.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(getActivity(), SearchTempActivity.class);
-//                startActivity(i);
-//            }
-//        });
-
         getInbox();
         getMyPost();
-
-        getInbox();
-        getMyPost();
+//        getVersion();
 
         return view;
     }
@@ -480,13 +367,13 @@ public class HomeFragment extends Fragment {
                                     String stat = obj.getString("presence_type");
                                     session.setStat(stat);
                                 }
-                                if (session.getStat().equals("CO")||session.getStat().equals("OO")) {
-//            Toast.makeText(getActivity(), "Saatnya Checkin", Toast.LENGTH_SHORT).show();
-                                    menu_checkin.setText("Check In");
-                                } else {
-//            Toast.makeText(getActivity(), "Saatnya Checkout", Toast.LENGTH_SHORT).show();
-                                    menu_checkin.setText("Check Out");
-                                }
+//                                if (session.getStat().equals("CO")||session.getStat().equals("OO")) {
+////            Toast.makeText(getActivity(), "Saatnya Checkin", Toast.LENGTH_SHORT).show();
+//                                    menu_checkin.setText("Check In");
+//                                } else {
+////            Toast.makeText(getActivity(), "Saatnya Checkout", Toast.LENGTH_SHORT).show();
+//                                    menu_checkin.setText("Check Out");
+//                                }
                                 System.out.println(jsonArray.length()+" ql3jen2kelr");
                             }else{
                             }
@@ -534,7 +421,7 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         // do anything with response
-                        System.out.println("GETMYPOST"+response);
+                        System.out.println(response+"ktjbkgrjbhymyposting");
                         try {
                             if(response.getInt("status")==200){
 //                                session.setToken(response.getString("token"));

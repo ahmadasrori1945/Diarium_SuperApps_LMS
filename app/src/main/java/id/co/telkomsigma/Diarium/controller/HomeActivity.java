@@ -83,19 +83,9 @@ public class HomeActivity extends AppCompatActivity {
         progressDialogHelper = new ProgressDialogHelper();
         session = new UserSessionManager(HomeActivity.this);
         progressDialog = new ProgressDialog(this);
-        Intent intent = getIntent();
-        String key = intent.getStringExtra("key");
 
-//        Toolbar tlbr = (Toolbar) findViewById(R.id.tolbar);
-//        setSupportActionBar(tlbr);
-//        getSupportActionBar().show();
         fragmentManager = getSupportFragmentManager();
-        if (key.equals("moreinbox")) {
-            fragment = new InboxFragment();
-        } else {
-            fragment = new HomeFragment();
-        }
-//        fragment = new HomeFragment();
+        fragment = new HomeFragment();
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.content, fragment).commit();
 

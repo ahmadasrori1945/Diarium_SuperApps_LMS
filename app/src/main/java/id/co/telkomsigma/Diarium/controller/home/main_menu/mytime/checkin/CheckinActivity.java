@@ -660,7 +660,6 @@ public class CheckinActivity extends AppCompatActivity implements MenuItem.OnMen
                                 getStatCheckin();
                                 session.setStat("CO");
                                 Intent i = new Intent(CheckinActivity.this, HomeActivity.class);
-                                i.putExtra("key", "none");
                                 startActivity(i);
                                 Toast.makeText(CheckinActivity.this,"Thanks for check in today!",Toast.LENGTH_SHORT).show();
 //                                finish();
