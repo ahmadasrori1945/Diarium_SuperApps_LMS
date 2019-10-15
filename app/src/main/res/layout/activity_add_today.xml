@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:weightSum="4"
     android:id="@+id/lin_login"
-    tools:context="id.co.telkomsigma.Diarium.controller.more.today_activity.AddTodayActActivity">
+    tools:context="id.co.telkomsigma.Diarium.controller.home.main_menu.today_activity.AddTodayActActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

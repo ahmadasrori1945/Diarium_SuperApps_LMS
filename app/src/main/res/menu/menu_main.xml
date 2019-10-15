@@ -2,8 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".controller.more.employee_corner.EmployeeCornerActivity"
-
+    tools:context=".controller.home.main_menu.employee_corner.EmployeeCornerActivity"
     >
 
     <item

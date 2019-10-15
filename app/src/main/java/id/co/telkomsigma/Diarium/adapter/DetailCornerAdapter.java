@@ -30,7 +30,7 @@ import java.util.Date;
 import java.util.List;
 
 import id.co.telkomsigma.Diarium.R;
-import id.co.telkomsigma.Diarium.controller.more.employee_corner.HistorycornerActivity;
+import id.co.telkomsigma.Diarium.controller.home.main_menu.employee_corner.HistorycornerActivity;
 import id.co.telkomsigma.Diarium.model.DetailCornerModel;
 import id.co.telkomsigma.Diarium.util.UserSessionManager;
 

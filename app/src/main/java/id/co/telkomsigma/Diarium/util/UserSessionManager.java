@@ -95,8 +95,225 @@ public class UserSessionManager {
         return pref.getString("ktp", "Update your data");
     }
 
+    public void setactivity_nameLMS(String id){
+        editor.putString("activity_name", id);
+        editor.commit();
+    }
+
+    public String getactivity_nameLMS(){
+        return pref.getString("activity_name", "-");
+    }
+
+    public void setsession_nameLMS(String id){
+        editor.putString("session_name", id);
+        editor.commit();
+    }
+
+    public String getsession_nameLMS(){
+        return pref.getString("session_name", "-");
+    }
+
+    public void setbegin_date_activityLMS(String id){
+        editor.putString("begin_date_activity", id);
+        editor.commit();
+    }
+
+    public String getbegin_date_activityLMS(){
+        return pref.getString("begin_date_activity", "-");
+    }
+
+    public void setend_date_activityLMS(String id){
+        editor.putString("end_date_activity", id);
+        editor.commit();
+    }
+
+    public String getend_date_activityLMS(){
+        return pref.getString("end_date_activity", "-");
+    }
+
+
+    public void setcompany_nameLMS(String id){
+        editor.putString("company_name_lms", id);
+        editor.commit();
+    }
+
+    public String getcompany_nameLMS(){
+        return pref.getString("company_name_lms", "-");
+    }
+
+    public void setBatchLMS(String id){
+        editor.putString("batch_lms", id);
+        editor.commit();
+    }
+
+    public String getBatchLMS(){
+        return pref.getString("batch_lms", "-");
+    }
+
+    public void setBatchNameLMS(String id){
+        editor.putString("batch_name_lms", id);
+        editor.commit();
+    }
+
+    public String getBatchNameLMS(){
+        return pref.getString("batch_name_lms", "-");
+    }
+
+    public void setEventIdLMS(String id){
+        editor.putString("event_id_lms", id);
+        editor.commit();
+    }
+
+    public String getEventIdLMS(){
+        return pref.getString("event_id_lms", "-");
+    }
+
+    public void setEventNameLMS(String id){
+        editor.putString("event_name_lms", id);
+        editor.commit();
+    }
+
+    public String getEventNameLMS(){
+        return pref.getString("event_name_lms", "-");
+    }
+
+    public void setBeginDateLMS(String id){
+        editor.putString("begin_date_lms", id);
+        editor.commit();
+    }
+
+    public String getBeginDateLMS(){
+        return pref.getString("begin_date_lms", "-");
+    }
+
+    public void setEndDateLMS(String id){
+        editor.putString("end_date_lms", id);
+        editor.commit();
+    }
+
+    public String getEndDateLMS(){
+        return pref.getString("end_date_lms", "-");
+    }
+
+    public void setevent_curr_statLMS(String id){
+        editor.putString("event_curr_stat_lms", id);
+        editor.commit();
+    }
+
+    public String getevent_curr_statLMS(){
+        return pref.getString("event_curr_stat_lms", "-");
+    }
+
+    public void setevnt_curr_statidLMS(String id){
+        editor.putString("evnt_curr_statid_lms", id);
+        editor.commit();
+    }
+
+    public String getevnt_curr_statidLMS(){
+        return pref.getString("evnt_curr_statid_lms", "-");
+    }
+
+    public void setevent_statusLMS(String id){
+        editor.putString("event_status_lms", id);
+        editor.commit();
+    }
+
+    public String getevent_statusLMS(){
+        return pref.getString("event_status_lms", "-");
+    }
+
+    public void setevent_stat_idLMS(String id){
+        editor.putString("event_stat_id_lms", id);
+        editor.commit();
+    }
+
+    public String getevent_stat_idLMS(){
+        return pref.getString("event_stat_id", "-");
+    }
+
+    public void setlocation_idLMS(String id){
+        editor.putString("location_id_lms", id);
+        editor.commit();
+    }
+
+    public String getlocation_idLMS(){
+        return pref.getString("location_id_lms", "-");
+    }
+
+    public void setlocationLMS(String id){
+        editor.putString("location_lms", id);
+        editor.commit();
+    }
+
+    public String getlocationLMS(){
+        return pref.getString("location_lms", "-");
+    }
+
+    public void setcur_idLMS(String id){
+        editor.putString("cur_id_lms", id);
+        editor.commit();
+    }
+
+    public String getcur_idLMS(){
+        return pref.getString("cur_id_lms", "-");
+    }
+
+    public void setcurriculumLMS(String id){
+        editor.putString("curriculum_lms", id);
+        editor.commit();
+    }
+
+    public String getcurriculumLMS(){
+        return pref.getString("curriculum_lms", "-");
+    }
+
+    public void setevent_typeLMS(String id){
+        editor.putString("event_type_lms", id);
+        editor.commit();
+    }
+
+    public String getevent_typeLMS(){
+        return pref.getString("event_type_lms", "-");
+    }
+
+    public void setparticipant_idLMS(String id){
+        editor.putString("participant_id_lms", id);
+        editor.commit();
+    }
+
+    public String getparticipant_idLMS(){
+        return pref.getString("participant_id_lms", "-");
+    }
+
+    public void setpartcipant_nameLMS(String id){
+        editor.putString("partcipant_name_lms", id);
+        editor.commit();
+    }
+
+    public String getpartcipant_nameLMS(){
+        return pref.getString("partcipant_name_lms", "-");
+    }
+
+    public void setparti_nicknmLMS(String id){
+        editor.putString("parti_nicknm_lms", id);
+        editor.commit();
+    }
+
+    public String getparti_nicknmLMS(){
+        return pref.getString("parti_nicknm_lms", "-");
+    }
+
+    public void setCountLMS(int id){
+        editor.putInt("count_question_lms", id);
+        editor.commit();
+    }
+
+    public int getCountLMS(){
+        return pref.getInt("count_question", 0);
+    }
+
     public void setCountQuestion(int id){
-        editor.putInt("count_question", id);
+        editor.putInt("count_question_lms", id);
         editor.commit();
     }
 
@@ -408,6 +625,26 @@ public class UserSessionManager {
     public  String getIdentifier() {
         return pref.getString("ide", "-");
     }
+
+    public void setRoleLMS(String name){
+        editor.putString("role_lms", name);
+        editor.commit();
+    }
+
+    public  String getRoleLMS() {
+        return pref.getString("role_lms", "-");
+    }
+
+
+    public void setTokenLdap(String name){
+        editor.putString("token_ldap", name);
+        editor.commit();
+    }
+
+    public  String getTokenLdap() {
+        return pref.getString("token_ldap", "-");
+    }
+
 
     public void setAvatar(String name){
         editor.putString("avatar", name);

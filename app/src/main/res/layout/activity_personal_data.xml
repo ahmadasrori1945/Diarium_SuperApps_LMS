@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="2"
-    tools:context="id.co.telkomsigma.Diarium.controller.more.personal_data.PersonalDataActivity">
+    tools:context="id.co.telkomsigma.Diarium.controller.home.main_menu.personal_data.PersonalDataActivity">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

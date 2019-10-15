@@ -64,10 +64,11 @@ public class DetailpostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.activity_detailpost);
+
         session = new UserSessionManager(this);
         progressDialogHelper = new ProgressDialogHelper();
         timeHelper = new TimeHelper();
-        setContentView(R.layout.activity_detailpost);
         Intent intent = getIntent();
         final String posting_id = intent.getStringExtra("posting_id");
         String title = intent.getStringExtra("title");
@@ -80,7 +81,11 @@ public class DetailpostActivity extends AppCompatActivity {
         demoView = findViewById(R.id.myZoomageView);
         ivLike = findViewById(R.id.ivLike);
         ivProfile = findViewById(R.id.ivProfile);
-        Picasso.get().load(avatar).error(R.drawable.profile).into(ivProfile);
+        if (avatar.isEmpty()) {
+            ivProfile.setImageResource(R.drawable.profile);
+        } else{
+            Picasso.get().load(avatar).error(R.drawable.profile).into(ivProfile);
+        }
 
 
 //        ivPost = findViewById(R.id.ivPost);
@@ -347,6 +352,7 @@ public class DetailpostActivity extends AppCompatActivity {
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        System.out.println("COMMENTRESPONSE"+response);
                         // do anything with response
                         try {
                             if(response.getInt("status")==200){
@@ -368,12 +374,8 @@ public class DetailpostActivity extends AppCompatActivity {
                                     String change_date = object.getString("change_date");
                                     String change_user = object.getString("change_user");
                                     String profile = object.getString("profile");
-                                    String full_name = null;
-                                    JSONArray nameArray = object.getJSONArray("name");
-                                    for (int b=0; b<nameArray.length(); b++) {
-                                        JSONObject objName = nameArray.getJSONObject(b);
-                                        full_name = objName.getString("full_name");
-                                    }
+                                    String full_name = object.getString("name");
+
                                     model = new CommentModel(begin_date, end_date, business_code, personal_number, posting_id, comment_id, text_comment, date, time, change_date, change_user, profile,full_name);
                                     listModel.add(model);
 

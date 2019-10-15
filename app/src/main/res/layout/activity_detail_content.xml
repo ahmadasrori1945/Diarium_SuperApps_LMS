@@ -7,7 +7,7 @@
     android:background="#F2F2F2"
     android:orientation="vertical"
     android:weightSum="2"
-    tools:context=".controller.more.myevent.ems.content.DetailContentActivity">
+    tools:context=".controller.home.main_menu.myevent.ems.content.DetailContentActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

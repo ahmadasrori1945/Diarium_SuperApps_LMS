@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.more.today_activity.PresenceLocationActivity">
+    tools:context=".controller.home.main_menu.today_activity.PresenceLocationActivity">
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".controller.more.checkin.CheckinActivity" />
+        tools:context=".controller.home.main_menu.mytime.checkin.CheckinActivity" />
 </androidx.constraintlayout.widget.ConstraintLayout>

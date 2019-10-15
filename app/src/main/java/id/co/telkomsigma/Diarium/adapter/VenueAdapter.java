@@ -67,7 +67,11 @@ public class VenueAdapter extends BaseAdapter {
         tvTitle.setText(model.getTitle());
         tvDate.setText(model.getBegin_date());
         tvPlace.setText(model.getVenue_desc());
-        Picasso.get().load(model.getImage()).error(R.drawable.placeholder_gallery).into(ivObat);
+        if (model.getImage().isEmpty()) {
+            ivObat.setImageResource(R.drawable.placeholder_gallery);
+        } else{
+            Picasso.get().load(model.getImage()).error(R.drawable.profile).into(ivObat);
+        }
         btnMaps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

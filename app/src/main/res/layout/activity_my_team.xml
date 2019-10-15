@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.more.myteam.MyTeamActivity"
+    tools:context=".controller.home.main_menu.myteam.MyTeamActivity"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout

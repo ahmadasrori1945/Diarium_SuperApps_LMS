@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.more.hr_wiki.DetailHRWiki">
+    tools:context=".controller.home.main_menu.hr_wiki.DetailHRWiki">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

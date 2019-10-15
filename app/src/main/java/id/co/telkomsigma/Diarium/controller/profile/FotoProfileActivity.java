@@ -82,7 +82,11 @@ public class FotoProfileActivity extends AppCompatActivity {
         ivProfile = (ImageView) findViewById(R.id.ivProfile);
         btnChange = (Button) findViewById(R.id.btnChange);
 
-        Picasso.get().load(sesion.getAvatar()).error(R.drawable.profile).into(ivProfile);
+        if (session.getAvatar().isEmpty()) {
+            ivProfile.setImageResource(R.drawable.profile);
+        } else{
+            Picasso.get().load(sesion.getAvatar()).error(R.drawable.profile).into(ivProfile);
+        }
 
         ivProfile.setOnClickListener(new View.OnClickListener() {
             @Override

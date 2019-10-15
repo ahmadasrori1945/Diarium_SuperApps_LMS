@@ -3,23 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="id.co.telkomsigma.Diarium">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <uses-permission
-        android:name="android.permission.INSTALL_PACKAGES"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.REQUEST_INSTALL_PACKAGES"
-        tools:ignore="ProtectedPermissions" />
-
-    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
-
     <application
         android:name=".util.MainApplication"
         android:allowBackup="true"
@@ -31,7 +14,66 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:allowBackup">
-        <activity android:name=".controller.profile.FullFotoActivity"></activity>
+        <activity
+            android:name=".controller.home.main_menu.mydevelopment.mytraining.MentoringDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".controller.home.main_menu.mydevelopment.mytraining.SampleFabActivity"
+            android:label="@string/title_activity_sample_fab"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity
+            android:name=".controller.home.main_menu.mydevelopment.mytraining.ForumDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".controller.home.main_menu.mydevelopment.mytraining.KuisionerLMSActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".controller.home.main_menu.mydevelopment.mytraining.MateriTrainerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".controller.home.main_menu.mydevelopment.myknowledge.SearchContentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".controller.home.main_menu.mydevelopment.myknowledge.MyKnowledgeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".controller.home.main_menu.mytime.izin.HistoryIzinActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".controller.home.main_menu.mydevelopment.mytraining.VideoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".controller.home.main_menu.mydevelopment.mytraining.MateriActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".controller.home.main_menu.mydevelopment.mytraining.ScheduleActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".controller.home.main_menu.mydevelopment.mytraining.EventSessionActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".controller.home.main_menu.mytime.izin.IzinActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".controller.home.main_menu.mydevelopment.mytraining.MyTrainingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".controller.profile.FullFotoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".controller.profile.FullscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -42,23 +84,23 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.employee_corner.ScannerFloorActivity"
+            android:name=".controller.home.main_menu.employee_corner.ScannerFloorActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.hr_wiki.DetailHRWiki"
+            android:name=".controller.home.main_menu.hr_wiki.DetailHRWiki"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.hr_wiki.HRWikiActivity"
+            android:name=".controller.home.main_menu.hr_wiki.HRWikiActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.employee_care.DetailEmployeeCareActivity"
+            android:name=".controller.home.main_menu.employee_care.DetailEmployeeCareActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.community.DetailCommunityContent"
+            android:name=".controller.home.main_menu.community.DetailCommunityContent"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <!--
@@ -69,10 +111,6 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-
         <activity
             android:name=".util.qiscus.ui.activity.QiscusChatActivity"
             android:label="FAQ"
@@ -81,11 +119,11 @@
             android:name=".util.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".controller.more.employee_care.AddNewCareActivity"
+            android:name=".controller.home.main_menu.employee_care.AddNewCareActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.employee_care.EmployeeCareActivity"
+            android:name=".controller.home.main_menu.employee_care.EmployeeCareActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
@@ -93,7 +131,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.myteam.AssignTodayActivity"
+            android:name=".controller.home.main_menu.myteam.AssignTodayActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
@@ -105,55 +143,50 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.community.CreatePostCommunityActivity"
+            android:name=".controller.home.main_menu.community.CreatePostCommunityActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.personal_data.EditPersonalDataActivity"
+            android:name=".controller.home.main_menu.personal_data.EditPersonalDataActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.today_activity.PresenceLocationActivity"
+            android:name=".controller.home.main_menu.today_activity.PresenceLocationActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".controller.more.community.CreateCommunityActivity"
+            android:name=".controller.home.main_menu.community.CreateCommunityActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.community.OverviewCommunityActivity"
+            android:name=".controller.home.main_menu.community.OverviewCommunityActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.myevent.ems.rundown.NewRundownActivity"
+            android:name=".controller.home.main_menu.myevent.ems.rundown.NewRundownActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.myevent.ems.rundown.NewAgendaActivity"
+            android:name=".controller.home.main_menu.myevent.ems.rundown.NewAgendaActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.myevent.ems.content.DetailContentActivity"
+            android:name=".controller.home.main_menu.myevent.ems.content.DetailContentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".controller.home.main_menu.employee_corner.NewEmployeeCornerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" /> <!-- <activity android:name=".controller.more.survey.SurveyIsiActivity" /> -->
-        <activity
-            android:name=".controller.more.employee_corner.NewEmployeeCornerActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
         <activity
             android:name=".controller.profile.FriendDataActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.search_partner.SearchTempActivity"
+            android:name=".controller.home.main_menu.search_partner.SearchTempActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-
-        <uses-library
-            android:name="org.apache.http.legacy"
-            android:required="false" />
-
         <activity
-            android:name=".controller.more.search_partner.SearchActivity"
+            android:name=".controller.home.main_menu.search_partner.SearchActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".controller.inbox.DetailInboxActivity"
@@ -161,59 +194,59 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.myevent.ems.rundown.EventRundownActivity"
+            android:name=".controller.home.main_menu.myevent.ems.rundown.EventRundownActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.myevent.ems.news.DetailNewsActivity"
+            android:name=".controller.home.main_menu.myevent.ems.news.DetailNewsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.myevent.ems.presence.PresenceActivity"
+            android:name=".controller.home.main_menu.myevent.ems.presence.PresenceActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.myevent.ems.feedback.FeedbackActivity"
+            android:name=".controller.home.main_menu.myevent.ems.feedback.FeedbackActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.myevent.ems.gallery.GalleryActivity"
+            android:name=".controller.home.main_menu.myevent.ems.gallery.GalleryActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.myevent.ems.gallery.GalleryDetailActivity"
+            android:name=".controller.home.main_menu.myevent.ems.gallery.GalleryDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.myevent.ems.gallery.TakePhotoActivity"
+            android:name=".controller.home.main_menu.myevent.ems.gallery.TakePhotoActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.myevent.ems.venue.VenueActivity"
+            android:name=".controller.home.main_menu.myevent.ems.venue.VenueActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.myevent.ems.content.ContentActivity"
+            android:name=".controller.home.main_menu.myevent.ems.content.ContentActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.myevent.ems.rundown.RundownActivity"
+            android:name=".controller.home.main_menu.myevent.ems.rundown.RundownActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.myevent.ems.news.NewsActivity"
+            android:name=".controller.home.main_menu.myevent.ems.news.NewsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.today_activity.MapsFromTodayActivity"
+            android:name=".controller.home.main_menu.today_activity.MapsFromTodayActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.onehseet.OneSheetActivity"
+            android:name=".controller.home.main_menu.onehseet.OneSheetActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.checkin.CheckinTempActivity"
+            android:name=".controller.home.main_menu.mytime.checkin.CheckinTempActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".controller.SplashscreenActivity">
             <intent-filter>
@@ -235,12 +268,12 @@
             android:label="@string/title_activity_home"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".controller.more.checkin.CheckinActivity"
+            android:name=".controller.home.main_menu.mytime.checkin.CheckinActivity"
             android:label="Check In"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.today_activity.AddTodayActActivity"
+            android:name=".controller.home.main_menu.today_activity.AddTodayActActivity"
             android:label="Today Activity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
@@ -255,7 +288,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.personal_data.PersonalDataActivity"
+            android:name=".controller.home.main_menu.personal_data.PersonalDataActivity"
             android:label="Personal Data"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
@@ -274,41 +307,41 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.today_activity.TodayActivity"
+            android:name=".controller.home.main_menu.today_activity.TodayActivity"
             android:label="Today Activity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.report.ReportActivity"
+            android:name=".controller.home.main_menu.report.ReportActivity"
             android:label="Report Activity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.today_activity.CommentActivity"
+            android:name=".controller.home.main_menu.today_activity.CommentActivity"
             android:label="Change Activity Status"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.myevent.MyEventActivity"
+            android:name=".controller.home.main_menu.myevent.MyEventActivity"
             android:label="My Event"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.myteam.MyTeamActivity"
+            android:name=".controller.home.main_menu.myteam.MyTeamActivity"
             android:label="MyTeam "
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.myevent.ems.EventActivity"
+            android:name=".controller.home.main_menu.myevent.ems.EventActivity"
             android:label="My Event "
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" /> <!-- android:theme="@style/AppTheme.NoActionBar" /> -->
+            android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.presence.PresenceActivity"
+            android:name=".controller.home.main_menu.presence.PresenceActivity"
             android:label="Presence "
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name=".util.element.FMActivity" />
+        <activity android:name=".util.element.FMActivity" /> <!-- android:theme="@style/AppTheme.NoActionBar" /> -->
         <activity
             android:name=".controller.profile.PostingActivity"
             android:label="Post"
@@ -323,65 +356,88 @@
             android:name="com.element.camera.ElementFaceAuthActivity"
             android:clearTaskOnLaunch="true"
             android:hardwareAccelerated="true"
-            android:screenOrientation="portrait" /> <!-- <activity -->
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".controller.home.main_menu.employee_corner.EmployeeCornerActivity"
+            android:label="Employee Corner"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".controller.home.main_menu.employee_corner.BookingcornerActivity"
+            android:label="Employee Corner"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" /> <!-- <activity -->
         <!-- android:name=".util.qiscus.ui.activity.QiscusChatActivity" -->
         <!-- android:label="FAQ" -->
         <!-- android:theme="@style/AppTheme" /> -->
         <activity
-            android:name=".controller.more.employee_corner.EmployeeCornerActivity"
+            android:name=".controller.home.main_menu.employee_corner.HistorycornerActivity"
             android:label="Employee Corner"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.employee_corner.BookingcornerActivity"
-            android:label="Employee Corner"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".controller.more.employee_corner.HistorycornerActivity"
-            android:label="Employee Corner"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".controller.more.community.CommunityActivity"
+            android:name=".controller.home.main_menu.community.CommunityActivity"
             android:label="Community"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.community.AcceptCommunityActivity"
+            android:name=".controller.home.main_menu.community.AcceptCommunityActivity"
             android:label="Community"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.community.CommunityMessageActivity"
+            android:name=".controller.home.main_menu.community.CommunityMessageActivity"
             android:label="Community"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.community.DetailCommunityActivity"
+            android:name=".controller.home.main_menu.community.DetailCommunityActivity"
             android:label="Community"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.survey.SurveyActivity"
+            android:name=".controller.home.main_menu.survey.SurveyActivity"
             android:label="Survey"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.survey.DetailSurveyActivity"
+            android:name=".controller.home.main_menu.survey.DetailSurveyActivity"
             android:label="Detail Survey"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.survey.QuestionSurveyActivity"
+            android:name=".controller.home.main_menu.survey.QuestionSurveyActivity"
             android:label="Survey"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".controller.more.community.AddMemberActivity"
+            android:name=".controller.home.main_menu.community.AddMemberActivity"
             android:label="Add Member"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission
+        android:name="android.permission.INSTALL_PACKAGES"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission
+        android:name="android.permission.REQUEST_INSTALL_PACKAGES"
+        tools:ignore="ProtectedPermissions" />
+
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
 
 </manifest>

@@ -15,7 +15,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import id.co.telkomsigma.Diarium.R;
-import id.co.telkomsigma.Diarium.controller.more.employee_corner.BookingcornerActivity;
+import id.co.telkomsigma.Diarium.controller.home.main_menu.employee_corner.BookingcornerActivity;
 import id.co.telkomsigma.Diarium.model.EmployeeCornerThemeModel;
 
 public class EmployeeCornerThemeAdapter extends BaseAdapter {

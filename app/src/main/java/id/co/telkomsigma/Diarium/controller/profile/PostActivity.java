@@ -115,7 +115,11 @@ public class PostActivity extends AppCompatActivity {
         name.setText(session.getUserFullName());
 
         initItem();
-        Picasso.get().load(session.getAvatar()).error(R.drawable.profile).into(ivProfile);
+        if (session.getAvatar().isEmpty()) {
+            ivProfile.setImageResource(R.drawable.profile);
+        } else{
+            Picasso.get().load(session.getAvatar()).error(R.drawable.profile).into(ivProfile);
+        }
 
         generatePostId();
 

@@ -1,6 +1,7 @@
 package id.co.telkomsigma.Diarium.controller;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -29,11 +30,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.element.common.PermissionUtils;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -41,6 +44,9 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import id.co.telkomsigma.Diarium.BuildConfig;
 import id.co.telkomsigma.Diarium.R;
@@ -331,9 +337,80 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    private void postDevice(String buscd, String nik){
+        System.out.println("MASUKDEVICE");
+//        final String nik = nikField.getText().toString();
+//        progressDialogHelper.showProgressDialog(LoginActivity.this, "Logging in..");
+//
+//        TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+//        String dev_id = "";
+//        if (ContextCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.READ_PHONE_STATE)
+//                != PackageManager.PERMISSION_GRANTED) {
+//
+//            dev_id =  telephonyManager.getDeviceId();
+//        }else{
+//            PermissionUtils.verifyPermissions(
+//                    LoginActivity.this,
+//                    Manifest.permission.READ_PHONE_STATE);
+//        }
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat tgl = new SimpleDateFormat("yyyy-MM-dd");
+        String tRes = tgl.format(new Date());
+        String reg_id = FirebaseInstanceId.getInstance().getToken();
+
+        JSONObject body = new JSONObject();
+        try {
+            body.put("begin_date",tRes);
+            body.put("end_date","9999-12-31");
+            body.put("business_code",buscd);
+            body.put("personal_number",nik);
+            body.put("device_id",nik);
+            body.put("device_model","ANDROID");
+            body.put("register_id",reg_id);
+            body.put("platform","ANDROID");
+            body.put("version_code","1");
+            body.put("change_user",nik);
+        }catch (JSONException e){
+            System.out.println(e);
+
+        }
+        System.out.println("PARAMDEVICE"+body);
+
+        AndroidNetworking.post(session.getServerURL()+"users/"+nik+"/personaldevice/"+nik+"/deviceid/"+nik)
+                .addHeaders("Accept","application/json")
+                .addHeaders("Content-Type","application/json")
+                .addJSONObjectBody(body)
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // do anything with response
+                        System.out.println(response+"RESPONAUTH");
+                        try {
+                            if (response.getInt("status")==200) {
+                                System.out.println("suksespostdevice");
+                            } else {
+                                System.out.println("gagalpost");
+                            }
+                            progressDialogHelper.dismissProgressDialog(LoginActivity.this);
+                        }catch (Exception e){
+                            progressDialogHelper.dismissProgressDialog(LoginActivity.this);
+                            System.out.println(e);
+                        }
+
+
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        progressDialogHelper.dismissProgressDialog(LoginActivity.this);
+                        Snackbar.make(rootView,"error to login", Snackbar.LENGTH_LONG).show();
+                        System.out.println(error);
+                    }
+                });
+    }
 
     private void attemptLogin(){
-
+        System.out.println("MASUKLOGIN");
         nikField.setError(null);
         passwordField.setError(null);
 
@@ -369,8 +446,8 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             progressDialogHelper.showProgressDialog(LoginActivity.this, "Logging in..");
 
-            TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-            String dev_id = "";
+//            TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+//            String dev_id = "";
 //            if (ContextCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.READ_PHONE_STATE)
 //                    != PackageManager.PERMISSION_GRANTED) {
 //
@@ -381,25 +458,20 @@ public class LoginActivity extends AppCompatActivity {
 //                        Manifest.permission.READ_PHONE_STATE);
 //            }
 
-            String reg_id = FirebaseInstanceId.getInstance().getToken();
+//            String reg_id = FirebaseInstanceId.getInstance().getToken();
 
             JSONObject body = new JSONObject();
             try {
-                body.put("nik",nik);
+                body.put("application_id","6");
+                body.put("username",nik);
                 body.put("password",password);
-                body.put("device_id",dev_id);
-                body.put("registration_id",reg_id);
-                body.put("device_model",Build.MODEL);
-                body.put("platform","ANDROID");
-                body.put("version_code", BuildConfig.VERSION_CODE);
-
             }catch (JSONException e){
                 System.out.println(e);
 
             }
-            System.out.println(body.toString());
+            System.out.println("PARAMLOGIN"+body);
 
-            AndroidNetworking.post(session.getServerURL()+"auth")
+            AndroidNetworking.post("https://main.hc.digitalevent.id/ldap/api/auth")
                     .addHeaders("Accept","application/json")
                     .addHeaders("Content-Type","application/json")
                     .addJSONObjectBody(body)
@@ -409,10 +481,10 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(JSONObject response) {
                             // do anything with response
-                            System.out.println(response+"mdhbq3e2hbr");
+                            System.out.println(response+"RESPONAUTH");
                             try {
                                 if(response.getInt("status")==200){
-                                    session.setToken(response.getString("data"));
+                                    session.setToken(response.getString("access_token"));
                                     session.setUserNik(nik);
 //                                    session.setUserNik("632406");
                                     getPersonalData(session.getToken(),session.getUserNIK());
@@ -473,6 +545,7 @@ public class LoginActivity extends AppCompatActivity {
                                 session.setBornDate(response.getJSONObject("data").getString("born_date").substring(5));
                                 session.setStatusClickBornDate("0");
                                 session.setUserFaceCode(session.getUserBusinessCode()+"-"+session.getUserNIK());
+                                postDevice(response.getJSONObject("data").getString("business_code"), pernr);
                                 JSONArray arrayPosisi = response.getJSONObject("data").getJSONArray("Posisi");
                                 for (int i=0;i<arrayPosisi.length();i++) {
                                     JSONObject objPosisi = arrayPosisi.getJSONObject(i);
@@ -506,7 +579,6 @@ public class LoginActivity extends AppCompatActivity {
                             Snackbar.make(rootView,"error to get personal data", Snackbar.LENGTH_LONG).show();
                             System.out.println(e);
                         }
-
                     }
                     @Override
                     public void onError(ANError error) {

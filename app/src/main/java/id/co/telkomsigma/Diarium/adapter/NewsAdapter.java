@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.TimeZone;
 
 import id.co.telkomsigma.Diarium.R;
-import id.co.telkomsigma.Diarium.controller.more.myevent.ems.news.DetailNewsActivity;
+import id.co.telkomsigma.Diarium.controller.home.main_menu.myevent.ems.news.DetailNewsActivity;
 import id.co.telkomsigma.Diarium.model.NewsModel;
 
 /**

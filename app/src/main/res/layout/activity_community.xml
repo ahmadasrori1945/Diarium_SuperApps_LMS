@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.more.community.CommunityActivity"
+    tools:context=".controller.home.main_menu.community.CommunityActivity"
     android:orientation="vertical">
 
 

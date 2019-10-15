@@ -433,7 +433,7 @@ public class ProfileActivity extends AppCompatActivity {
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        System.out.println(response+"mnngktkjt");
+                        System.out.println(response+"JUMLAHCOMMUNITY");
                         try {
                             if(response.getInt("status")==200){
                                 JSONArray jsonArray = response.getJSONArray("data");

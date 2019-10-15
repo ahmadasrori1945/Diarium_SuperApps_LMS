@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,9 +33,9 @@ import java.util.List;
 import java.util.TimeZone;
 
 import id.co.telkomsigma.Diarium.R;
-import id.co.telkomsigma.Diarium.controller.more.employee_corner.BookingcornerActivity;
-import id.co.telkomsigma.Diarium.controller.more.employee_corner.HistorycornerActivity;
-import id.co.telkomsigma.Diarium.controller.more.employee_corner.ScannerFloorActivity;
+import id.co.telkomsigma.Diarium.controller.home.main_menu.employee_corner.BookingcornerActivity;
+import id.co.telkomsigma.Diarium.controller.home.main_menu.employee_corner.HistorycornerActivity;
+import id.co.telkomsigma.Diarium.controller.home.main_menu.employee_corner.ScannerFloorActivity;
 import id.co.telkomsigma.Diarium.model.BookingemployeeCornerModel;
 import id.co.telkomsigma.Diarium.util.UserSessionManager;
 

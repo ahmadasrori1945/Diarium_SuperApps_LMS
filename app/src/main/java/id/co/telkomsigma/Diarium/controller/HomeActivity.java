@@ -1,12 +1,10 @@
 package id.co.telkomsigma.Diarium.controller;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
@@ -20,12 +18,10 @@ import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,13 +32,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.DownloadListener;
-import com.androidnetworking.interfaces.DownloadProgressListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONArray;
@@ -53,7 +44,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
@@ -63,13 +53,10 @@ import id.co.telkomsigma.Diarium.R;
 import id.co.telkomsigma.Diarium.controller.friend.FriendsFragment;
 import id.co.telkomsigma.Diarium.controller.home.HomeFragment;
 import id.co.telkomsigma.Diarium.controller.inbox.InboxFragment;
-import id.co.telkomsigma.Diarium.controller.more.MoreFragment;
 import id.co.telkomsigma.Diarium.controller.notification.NotifikasiFragment;
 import id.co.telkomsigma.Diarium.util.AutoUpdater;
-import id.co.telkomsigma.Diarium.util.UpdaterApps;
 import id.co.telkomsigma.Diarium.util.UserSessionManager;
 import id.co.telkomsigma.Diarium.util.element.ProgressDialogHelper;
-import io.nlopez.smartlocation.SmartLocation;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -143,7 +130,7 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 });
 //        session.setCurrentDate("2015-01-06");
-        getStatCheckin();
+//        getStatCheckin();
     }
 
 
@@ -167,7 +154,7 @@ public class HomeActivity extends AppCompatActivity {
             //No internet
         }
         checkVersion();
-        getStatCheckin();
+//        getStatCheckin();
         getAva();
         fragment = new HomeFragment();
     }
@@ -225,7 +212,6 @@ public class HomeActivity extends AppCompatActivity {
 
     private void getAva(){
         progressDialogHelper.changeMessage("Get personal data..");
-
         AndroidNetworking.get(session.getServerURL()+"users/"+session.getUserNIK()+"/personal/"+session.getUserNIK())
                 .addHeaders("Accept","application/json")
                 .addHeaders("Content-Type","application/json")

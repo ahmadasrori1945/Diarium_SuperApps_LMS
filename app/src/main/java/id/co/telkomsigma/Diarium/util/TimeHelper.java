@@ -1,5 +1,6 @@
 package id.co.telkomsigma.Diarium.util;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -9,12 +10,17 @@ import java.util.Date;
 
 public class TimeHelper {
 
-    public String getTimeNow(){
+    public String getTimeFormat(String date){
 
-        long yourmilliseconds = System.currentTimeMillis();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        Date resultdate = new Date(yourmilliseconds);
-        return  sdf.format(resultdate);
+        SimpleDateFormat spf=new SimpleDateFormat("yyyy-mm-dd");
+        Date newDate= null;
+        try {
+            newDate = spf.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        spf= new SimpleDateFormat("dd MMM yyyy");
+        return spf.format(newDate);
     }
 
     public String getElapsedTime(String time){

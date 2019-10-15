@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.more.myevent.ems.rundown.NewAgendaActivity">
+    tools:context=".controller.home.main_menu.myevent.ems.rundown.NewAgendaActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

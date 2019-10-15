@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import id.co.telkomsigma.Diarium.R;
-import id.co.telkomsigma.Diarium.controller.more.myevent.ems.EventActivity;
+import id.co.telkomsigma.Diarium.controller.home.main_menu.myevent.ems.EventActivity;
 
 
 /**

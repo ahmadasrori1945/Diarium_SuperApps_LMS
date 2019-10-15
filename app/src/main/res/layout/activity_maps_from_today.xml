@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.more.today_activity.MapsFromTodayActivity">
+    tools:context=".controller.home.main_menu.today_activity.MapsFromTodayActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

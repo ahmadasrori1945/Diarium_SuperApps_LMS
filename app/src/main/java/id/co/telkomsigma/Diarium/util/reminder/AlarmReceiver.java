@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import id.co.telkomsigma.Diarium.controller.more.myevent.ems.EventActivity;
+import id.co.telkomsigma.Diarium.controller.home.main_menu.myevent.ems.EventActivity;
 import id.co.telkomsigma.Diarium.util.LocalData;
 
 /**

@@ -1,14 +1,7 @@
 package id.co.telkomsigma.Diarium.util.qiscus.ui.activity;
 
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,29 +12,19 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.qiscus.sdk.Qiscus;
 import com.qiscus.sdk.chat.core.data.model.QiscusChatRoom;
 import com.qiscus.sdk.ui.QiscusGroupChatActivity;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import id.co.telkomsigma.Diarium.BuildConfig;
 import id.co.telkomsigma.Diarium.R;
-import id.co.telkomsigma.Diarium.adapter.OurTeamAdapter;
-import id.co.telkomsigma.Diarium.controller.LoginActivity;
-import id.co.telkomsigma.Diarium.controller.more.today_activity.TodayActivity;
-import id.co.telkomsigma.Diarium.model.OurTeamModel;
 import id.co.telkomsigma.Diarium.util.UserSessionManager;
 import id.co.telkomsigma.Diarium.util.qiscus.ui.presenter.MainPresenter;
 import id.co.telkomsigma.Diarium.util.qiscus.ui.presenter.MvpView.MainMvp;

@@ -10,22 +10,32 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import id.co.telkomsigma.Diarium.R;
 import id.co.telkomsigma.Diarium.adapter.MenuAdapter;
-import id.co.telkomsigma.Diarium.controller.more.checkin.CheckinActivity;
-import id.co.telkomsigma.Diarium.controller.more.community.CommunityActivity;
-import id.co.telkomsigma.Diarium.controller.more.employee_care.EmployeeCareActivity;
-import id.co.telkomsigma.Diarium.controller.more.employee_corner.EmployeeCornerActivity;
-import id.co.telkomsigma.Diarium.controller.more.hr_wiki.HRWikiActivity;
-import id.co.telkomsigma.Diarium.controller.more.myevent.MyEventActivity;
-import id.co.telkomsigma.Diarium.controller.more.myteam.MyTeamActivity;
-import id.co.telkomsigma.Diarium.controller.more.onehseet.OneSheetActivity;
-import id.co.telkomsigma.Diarium.controller.more.personal_data.PersonalDataActivity;
-import id.co.telkomsigma.Diarium.controller.more.report.ReportActivity;
-import id.co.telkomsigma.Diarium.controller.more.survey.SurveyActivity;
-import id.co.telkomsigma.Diarium.controller.more.today_activity.TodayActivity;
+import id.co.telkomsigma.Diarium.controller.home.main_menu.mydevelopment.myknowledge.MyKnowledgeActivity;
+import id.co.telkomsigma.Diarium.controller.home.main_menu.mytime.checkin.CheckinActivity;
+import id.co.telkomsigma.Diarium.controller.home.main_menu.community.CommunityActivity;
+import id.co.telkomsigma.Diarium.controller.home.main_menu.employee_care.EmployeeCareActivity;
+import id.co.telkomsigma.Diarium.controller.home.main_menu.employee_corner.EmployeeCornerActivity;
+import id.co.telkomsigma.Diarium.controller.home.main_menu.hr_wiki.HRWikiActivity;
+import id.co.telkomsigma.Diarium.controller.home.main_menu.myevent.MyEventActivity;
+import id.co.telkomsigma.Diarium.controller.home.main_menu.myteam.MyTeamActivity;
+import id.co.telkomsigma.Diarium.controller.home.main_menu.mytime.izin.IzinActivity;
+import id.co.telkomsigma.Diarium.controller.home.main_menu.mydevelopment.mytraining.MyTrainingActivity;
+import id.co.telkomsigma.Diarium.controller.home.main_menu.onehseet.OneSheetActivity;
+import id.co.telkomsigma.Diarium.controller.home.main_menu.personal_data.PersonalDataActivity;
+import id.co.telkomsigma.Diarium.controller.home.main_menu.report.ReportActivity;
+import id.co.telkomsigma.Diarium.controller.home.main_menu.survey.SurveyActivity;
+import id.co.telkomsigma.Diarium.controller.home.main_menu.today_activity.TodayActivity;
 import id.co.telkomsigma.Diarium.util.UserSessionManager;
-import id.co.telkomsigma.Diarium.util.qiscus.ui.activity.QiscusChatActivity;
 
 public class SubMyTimeActivity extends AppCompatActivity {
     GridView gridView;
@@ -35,6 +45,7 @@ public class SubMyTimeActivity extends AppCompatActivity {
     String[] menuMyTime ={
             "Check In",
             "Cuti Online"
+
     };
 
     int[] imageMyTime={
@@ -48,6 +59,7 @@ public class SubMyTimeActivity extends AppCompatActivity {
             "Kontrak Management",
             "SKI / NKI",
             "CBHRM 360",
+
     };
     int[] imageMyPerformance={
             R.drawable.ic_reward,
@@ -59,6 +71,7 @@ public class SubMyTimeActivity extends AppCompatActivity {
     String[] menuMyTask ={
             "Today Activity",
             "Report Activity"
+
     };
 
     int[] imageMyTask={
@@ -76,6 +89,7 @@ public class SubMyTimeActivity extends AppCompatActivity {
             "Survey",
             "Employee Corner",
             "HR Wiki"
+
     };
 
     int[] imageMyProfile={
@@ -113,15 +127,16 @@ public class SubMyTimeActivity extends AppCompatActivity {
     };
     //============================================================================================== DEVELOPMENT 0
     String[] menuMyDevelopment ={
-            "Ingenium",
-            "Cognitium",
-            "Assistium"
+            "My Career",
+            "My Knowledge",
+            "Assistium",
+            "My Learning"
     };
-
 
     int[] imageMyDevelopment={
             R.drawable.myevent,
             R.drawable.ic_congnitium,
+            R.drawable.myevent,
             R.drawable.myevent
     };
 
@@ -209,7 +224,8 @@ public class SubMyTimeActivity extends AppCompatActivity {
                         startActivity(i);
                         break;
                     case "Cuti Online":
-                        Toast.makeText(SubMyTimeActivity.this, "This menu not available", Toast.LENGTH_SHORT).show();
+                        i = new Intent(SubMyTimeActivity.this, IzinActivity.class);
+                        startActivity(i);
                         break;
 
                     //============================================================================================== PERFORMANCE
@@ -297,21 +313,60 @@ public class SubMyTimeActivity extends AppCompatActivity {
                         break;
 
                     //============================================================================================== DEVELOPMENT
-                    case "Ingenium":
+                    case "My Career":
                         Toast.makeText(SubMyTimeActivity.this, "This menu not available", Toast.LENGTH_SHORT).show();
                         break;
-                    case "Cognitium":
-                        Toast.makeText(SubMyTimeActivity.this, "This menu not available", Toast.LENGTH_SHORT).show();
+                    case "My Knowledge":
+                        i = new Intent(SubMyTimeActivity.this, MyKnowledgeActivity.class);
+                        startActivity(i);
                         break;
                     case "Assistium":
                         Toast.makeText(SubMyTimeActivity.this, "This menu not available", Toast.LENGTH_SHORT).show();
                         break;
+                    case "My Learning":
+                        i = new Intent(SubMyTimeActivity.this, MyTrainingActivity.class);
+                        startActivity(i);
+                        break;
                 }
             }
         });
+        getRoleLMS();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(code);
+    }
+
+
+    private void getRoleLMS(){
+        System.out.println("MASUKROLELMS");
+        AndroidNetworking.get(session.getServerURL()+"get_v_lms_userbuscd/nik/"+session.getUserNIK()+"/buscd/"+session.getUserBusinessCode())
+                .addHeaders("Accept","application/json")
+                .addHeaders("Content-Type","application/json")
+                .addHeaders("Authorization",session.getToken())
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // do anything with response
+                        System.out.println("RESPONROLELMS"+response);
+                        try {
+                            JSONArray data = response.getJSONArray("data");
+                            for (int i=0;i<data.length();i++) {
+                                JSONObject object = data.getJSONObject(i);
+                                String role_code = object.getString("role_code");
+                                session.setRoleLMS(role_code);
+                            }
+                        }catch (Exception e){
+                            System.out.println(e);
+                        }
+
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        System.out.println(error);
+                    }
+                });
     }
 
     @Override
