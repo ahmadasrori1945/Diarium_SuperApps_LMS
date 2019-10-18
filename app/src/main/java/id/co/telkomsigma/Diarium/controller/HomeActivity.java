@@ -124,7 +124,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -140,7 +139,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         } else {
             Toast.makeText(this, "Connection problem", Toast.LENGTH_SHORT).show();
-
             //No internet
         }
         checkVersion();

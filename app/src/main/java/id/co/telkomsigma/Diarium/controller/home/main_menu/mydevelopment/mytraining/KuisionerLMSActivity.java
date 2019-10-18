@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.SparseBooleanArray;
 import android.view.Gravity;
 import android.view.View;
@@ -57,10 +58,7 @@ import id.co.telkomsigma.Diarium.util.element.ProgressDialogHelper;
 
 public class KuisionerLMSActivity extends AppCompatActivity {
     int mSelectedItem = 0;
-    int count=0;
     Typeface font,fontbold;
-    //NUMBER FOR THE COUNTER
-    public int mCount = 100;
     LinearLayout lay_esay, lay_multiple_choice, lay_true_false;
     Button buttonAction;
     int posisi = 0;
@@ -68,31 +66,23 @@ public class KuisionerLMSActivity extends AppCompatActivity {
     JSONArray answer ;
     private List<KuisionerLMSModel> listModel;
     private KuisionerLMSModel model;
-
-    private List<JawabanSurveyModel> listModelJawaban;
-    private JawabanSurveyModel modelJawaban;
-
     private List<AnswerQuesionerLMSModel> listModelAnswer;
     private AnswerQuesionerLMSModel modelAnswer;
     private AnswerKuisionerAdapter adapterPg;
-    boolean click = false;
     ArrayList<String> listJawabanEsay;
     private ProgressDialogHelper progressDialogHelper;
     ListView listMultipleChoice;
     EditText etEsay;
     TextView tvPertanyaanKe, tvText, tvTitle;
-    String survey_id, survey_name, survey_content;
-//    JSONArray dat;
-    SparseBooleanArray sparseBooleanArray ;
     RadioButton radioTrue, radioFalse, radioButton;
     RadioGroup rgTF;
-    String jawaban = "aaa";
+    String jawaban;
+    ArrayList<String> mylist = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kuisioner_lms);
         listModel = new ArrayList<KuisionerLMSModel>();
-
         answer = new JSONArray();
         listJawabanEsay = new ArrayList<String>();
         session = new UserSessionManager(this);
@@ -113,7 +103,6 @@ public class KuisionerLMSActivity extends AppCompatActivity {
         rgTF = findViewById(R.id.radioGroupTF);
         listModelAnswer = new ArrayList<AnswerQuesionerLMSModel>();
         getQuestion();
-//        getAnswer();
         lay_multiple_choice.setVisibility(View.GONE);
         lay_true_false.setVisibility(View.GONE);
         lay_esay.setVisibility(View.GONE);
@@ -123,57 +112,42 @@ public class KuisionerLMSActivity extends AppCompatActivity {
                 System.out.println(posisi+"POSISISAATINISETELAHCLICK"+session.getCountLMS());
                 if (posisi+1==session.getCountLMS()) {
                     if (listModel.get(posisi).getQuesioner_type_value().equals("01")) {
-                        SparseBooleanArray checked = listMultipleChoice.getCheckedItemPositions();
-                        ArrayList<String> selectedItems = new ArrayList<String>();
-                        for (int i = 0; i < listModelAnswer.size(); i++) {
-                            if (checked.get(i))
-                                selectedItems.add((String) adapterPg.getItem(i));
+                        System.out.println(listModelAnswer.size()+"PANJANGJAWABAN");
+                        for (int i=0;i<listModelAnswer.size();i++) {
+                            if (listModelAnswer.get(i).isSelected()) {
+                                mylist.add(listModelAnswer.get(i).getAnswer_text());
+                                System.out.println("Jawaban"+listModelAnswer.get(i).getAnswer_text());
+                            }
                         }
-
-                        String[] outputStrArr = new String[selectedItems.size()];
-                        for (int i = 0; i < selectedItems.size(); i++) {
-                            outputStrArr[i] = selectedItems.get(i);
-                            Toast.makeText(KuisionerLMSActivity.this, outputStrArr[i], Toast.LENGTH_SHORT).show();
-                        }
-//                        Toast.makeText(KuisionerLMSActivity.this, "Selesai Multiple Choice", Toast.LENGTH_SHORT).show();
-//                        submitKuisioner(listModel.get(posisi).getQuesioner_id(),"","","kelar");
+                        String joined = TextUtils.join(", ", mylist);
+                        submitKuisioner(listModel.get(posisi).getQuesioner_id(),"3",joined,"kelar");
                     } else if (listModel.get(posisi).getQuesioner_type_value().equals("02")) {
                         int selectedId = rgTF.getCheckedRadioButtonId();
                         RadioButton radioSexButton = findViewById(selectedId);
                         String txt = String.valueOf(radioSexButton.getText());
-//                        Toast.makeText(KuisionerLMSActivity.this, txt, Toast.LENGTH_SHORT).show();
                         submitKuisioner(listModel.get(posisi).getQuesioner_id(),"3",txt,"kelar");
                     } else {
                         String text_answer = etEsay.getText().toString();
-//                        Toast.makeText(KuisionerLMSActivity.this, "Selesai"+text_answer, Toast.LENGTH_SHORT).show();
                         submitKuisioner(listModel.get(posisi).getQuesioner_id(),"3",text_answer,"kelar");
                     }
                 } else {
                     if (listModel.get(posisi).getQuesioner_type_value().equals("01")) {
-                        SparseBooleanArray checked = listMultipleChoice.getCheckedItemPositions();
-                        ArrayList<String> selectedItems = new ArrayList<String>();
-
-                        for (int i = 0; i < listModelAnswer.size(); i++) {
-                            if (checked.get(i))
-                                selectedItems.add((String) adapterPg.getItem(i));
+                        System.out.println(listModelAnswer.size()+"PANJANGJAWABAN");
+                        for (int i=0;i<listModelAnswer.size();i++) {
+                            if (listModelAnswer.get(i).isSelected()) {
+                                mylist.add(listModelAnswer.get(i).getAnswer_text());
+                                System.out.println("Jawaban"+listModelAnswer.get(i).getAnswer_text());
+                            }
                         }
-                        String[] outputStrArr = new String[selectedItems.size()];
-
-                        for (int i = 0; i < selectedItems.size(); i++) {
-                            outputStrArr[i] = selectedItems.get(i);
-                            Toast.makeText(KuisionerLMSActivity.this, outputStrArr[i], Toast.LENGTH_SHORT).show();
-                        }
-//                        Toast.makeText(KuisionerLMSActivity.this, "Multiple Choice", Toast.LENGTH_SHORT).show();
-//                        submitKuisioner(listModel.get(posisi).getQuesioner_id(),"","","b");
+                        String joined = TextUtils.join(", ", mylist);
+                        submitKuisioner(listModel.get(posisi).getQuesioner_id(),"3",joined,"b");
                     } else if (listModel.get(posisi).getQuesioner_type_value().equals("02")) {
                         int selectedId = rgTF.getCheckedRadioButtonId();
                         RadioButton radioSexButton = findViewById(selectedId);
                         String txt = String.valueOf(radioSexButton.getText());
-//                        Toast.makeText(KuisionerLMSActivity.this, txt, Toast.LENGTH_SHORT).show();
                         submitKuisioner(listModel.get(posisi).getQuesioner_id(),"3",txt,"b");
                     } else {
                         String text_answer = etEsay.getText().toString();
-//                        Toast.makeText(KuisionerLMSActivity.this, text_answer, Toast.LENGTH_SHORT).show();
                         submitKuisioner(listModel.get(posisi).getQuesioner_id(),"3",text_answer,"b");
                     }
                     posisi++;
@@ -184,8 +158,6 @@ public class KuisionerLMSActivity extends AppCompatActivity {
                 }
             }
         });
-
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Survey");
     }
@@ -203,13 +175,10 @@ public class KuisionerLMSActivity extends AppCompatActivity {
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        // do anything with response
                         System.out.println(response+"RESPONPERTANYAANLMS");
                         try {
-//                            dat =  response.getJSONArray("data");
                             JSONArray jsonArray = response.getJSONArray("data");
                             String quesioner_id = null,quesioner_text = null, quesioner_title = null, tipe = null;
-                            System.out.println("PANJANGDATA"+jsonArray.length());
                             session.setCountLMS(jsonArray.length());
                             for (int a = 0; a < jsonArray.length(); a++) {
                                 JSONObject object = jsonArray.getJSONObject(a);
@@ -225,9 +194,7 @@ public class KuisionerLMSActivity extends AppCompatActivity {
                             tvTitle.setText(listModel.get(posisi).getQuesioner_title());
                             getAnswer(listModel.get(posisi).getQuesioner_type_value());
 //                            posisi++;
-                            System.out.println(posisi+"POSISISAATINISEBELUMCLICK"+session.getCountLMS());
                         }catch (Exception e){
-                            System.out.println(e);
                         }
                         progressDialogHelper.dismissProgressDialog(KuisionerLMSActivity.this);
                     }
@@ -238,7 +205,6 @@ public class KuisionerLMSActivity extends AppCompatActivity {
                     }
                 });
     }
-
 
     private void getAnswer(String tipe){
         progressDialogHelper.showProgressDialog(KuisionerLMSActivity.this, "Getting data...");
@@ -266,20 +232,11 @@ public class KuisionerLMSActivity extends AppCompatActivity {
                                 for (int a = 0; a < jsonArray.length(); a++) {
                                     JSONObject object = jsonArray.getJSONObject(a);
                                     String text = object.getString("text_choice");
-                                    modelAnswer= new AnswerQuesionerLMSModel("", text);
+                                    modelAnswer= new AnswerQuesionerLMSModel("", text, false);
                                     listModelAnswer.add(modelAnswer);
                                 }
                                 adapterPg = new AnswerKuisionerAdapter(KuisionerLMSActivity.this, listModelAnswer, mSelectedItem);
                                 listMultipleChoice.setAdapter(adapterPg);
-//                                listMultipleChoice.setOnItemClickListener(new AdapterView.OnItemClickListener()
-//                                {
-//                                    @Override
-//                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                                        // TODO Auto-generated method stub
-//
-//                                    }
-//                                });
-
                             } else if (tipe.equals("02")) {
                                 lay_multiple_choice.setVisibility(View.GONE);
                                 lay_esay.setVisibility(View.GONE);
@@ -288,10 +245,9 @@ public class KuisionerLMSActivity extends AppCompatActivity {
                                 for (int a = 0; a < jsonArray.length(); a++) {
                                     JSONObject object = jsonArray.getJSONObject(a);
                                     String text = object.getString("text_choice");
-                                    modelAnswer= new AnswerQuesionerLMSModel("", text);
+                                    modelAnswer= new AnswerQuesionerLMSModel("", text, false);
                                     listModelAnswer.add(modelAnswer);
                                 }
-
                                 rgTF.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                                     @Override
                                     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
@@ -299,28 +255,11 @@ public class KuisionerLMSActivity extends AppCompatActivity {
                                         jawaban = rb.getText().toString();
                                     }
                                 });
-
-//                                rgTF.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//                                    @Override
-//                                    public void onCheckedChanged(RadioGroup radioGroup, int i) {
-//                                        switch(i){
-//                                            case R.id.radioTrue:
-//                                                jawaban = "True";
-//                                                Toast.makeText(KuisionerLMSActivity.this, jawaban, Toast.LENGTH_SHORT).show();
-//                                                break;
-//                                            case R.id.radioFalse:
-//                                                jawaban = "False";
-//                                                Toast.makeText(KuisionerLMSActivity.this, jawaban, Toast.LENGTH_SHORT).show();
-//                                                break;
-//                                        }
-//                                    }
-//                                });
                             } else {
                                 lay_multiple_choice.setVisibility(View.GONE);
                                 lay_true_false.setVisibility(View.GONE);
                                 lay_esay.setVisibility(View.VISIBLE);
                                 jawaban = etEsay.getText().toString();
-//                                session.setJawaban(jawaban);
                             }
                             progressDialogHelper.dismissProgressDialog(KuisionerLMSActivity.this);
                         }catch (Exception e){
@@ -353,7 +292,6 @@ public class KuisionerLMSActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        System.out.println(jGroup + "ARRAYPOST");
         AndroidNetworking.post("https://testapi.digitalevent.id/lms/api/quesionerparticipantchoice")
                 .addHeaders("Accept","application/json")
                 .addHeaders("Content-Type","application/json")
@@ -368,26 +306,12 @@ public class KuisionerLMSActivity extends AppCompatActivity {
                         System.out.println(response+"RESPONPOST : "+text_choice);
                         if (kondisi.equals("kelar")) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(KuisionerLMSActivity.this);
-
-//                            builder.setTitle("Confirm");
                             builder.setMessage("Terima kasih telah mengisi kuesioner ini !");
-
                             builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-
                                 public void onClick(DialogInterface dialog, int which) {
                                     finish();
                                 }
                             });
-
-//                            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialog, int which) {
-//
-//                                    // Do nothing
-//                                    dialog.dismiss();
-//                                }
-//                            });
-
                             AlertDialog alert = builder.create();
                             alert.show();
                         }

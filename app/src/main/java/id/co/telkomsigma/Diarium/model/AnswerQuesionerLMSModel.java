@@ -3,10 +3,12 @@ package id.co.telkomsigma.Diarium.model;
 public class AnswerQuesionerLMSModel {
     String answer_id;
     String answer_text;
+    boolean selected;
 
-    public AnswerQuesionerLMSModel(String answer_id, String answer_text) {
+    public AnswerQuesionerLMSModel(String answer_id, String answer_text, boolean selected) {
         this.answer_id = answer_id;
         this.answer_text = answer_text;
+        this.selected = selected;
     }
 
     public String getAnswer_id() {
@@ -23,5 +25,13 @@ public class AnswerQuesionerLMSModel {
 
     public void setAnswer_text(String answer_text) {
         this.answer_text = answer_text;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 }

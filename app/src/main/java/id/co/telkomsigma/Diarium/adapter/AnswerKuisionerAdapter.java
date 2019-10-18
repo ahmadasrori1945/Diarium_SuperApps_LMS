@@ -24,12 +24,10 @@ public class AnswerKuisionerAdapter extends BaseAdapter {
     private Context mContext;
     private AnswerQuesionerLMSModel model;
     private List<AnswerQuesionerLMSModel> listModel;
-    private TextView tvAnswer, tvDate, tvDesc;
     private ImageView ivObat;
     private LinearLayout pesan;
     private RadioButton radioAnswer;
     private int posisinya;
-    private CheckBox checkBox;
     ArrayList<String> selectedStrings = new ArrayList<String>();
 
     public AnswerKuisionerAdapter(Context mContext, List<AnswerQuesionerLMSModel> listModel, int pos) {
@@ -56,32 +54,42 @@ public class AnswerKuisionerAdapter extends BaseAdapter {
     @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
+        ViewHolder holder = null;
         model = listModel.get(position);
+
         if (view == null) {
-            LayoutInflater inflater = LayoutInflater.from(mContext);
-            view = inflater.inflate(R.layout.list_item_answer, null);
+            holder = new ViewHolder(); LayoutInflater inflater = (LayoutInflater) mContext
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.list_item_answer, null, true);
+            holder.checkBox = view.findViewById(R.id.checkBoxAnswer);
+            holder.tvAnswer = view.findViewById(R.id.tvAnswer);
+            view.setTag(holder);
+        }else {
+            holder = (ViewHolder)view.getTag();
         }
-        pesan = view.findViewById(R.id.pesan);
-        tvAnswer = view.findViewById(R.id.tvAnswer);
-        checkBox = view.findViewById(R.id.checkBoxAnswer);
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
+        holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    selectedStrings.add(checkBox.getText().toString());
-                }else{
-                    selectedStrings.remove(checkBox.getText().toString());
+            public void onClick(View v) {
+                if(listModel.get(position).isSelected()){
+                    listModel.get(position).setSelected(false);
+                    System.out.println(listModel.get(position).isSelected()+" posisiadapter"+position);
+                }else {
+                    listModel.get(position).setSelected(true);
+                    System.out.println(listModel.get(position).isSelected()+" posisiadapter"+position);
                 }
-
             }
         });
-        tvAnswer.setText(model.getAnswer_text());
+        holder.tvAnswer.setText(model.getAnswer_text());
+
+
         return view;
     }
 
-    ArrayList<String> getSelectedString(){
-        return selectedStrings;
+    private class ViewHolder {
+        protected CheckBox checkBox;
+        private TextView tvAnswer;
+
     }
 }
 
