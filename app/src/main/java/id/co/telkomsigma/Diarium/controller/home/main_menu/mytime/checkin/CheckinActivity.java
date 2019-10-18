@@ -366,7 +366,7 @@ public class CheckinActivity extends AppCompatActivity implements MenuItem.OnMen
                                 } else {
                                     checkOut();
                                 }
-//
+////
 //                                Intent i = new Intent(CheckinActivity.this, FMActivity.class);
 //                                i.putExtra(FMActivity.USER_ID,session.getUserFaceCode());
 //                                i.putExtra(FMActivity.METHOD,FMActivity.METHOD_FR);
@@ -443,7 +443,6 @@ public class CheckinActivity extends AppCompatActivity implements MenuItem.OnMen
                     JSONObject dat = new JSONObject(session.getFMMessage());
                     System.out.println(dat+"dljwnk3j4nr");
                     if(dat.getString("result").equals("VERIFIED")){
-                        System.out.println(session.getStat()+"STATABSEN");
                         if (session.getStat().equals("CO")||session.getStat().equals("OO")) {
                             checkIn();
                         } else {
@@ -647,7 +646,7 @@ public class CheckinActivity extends AppCompatActivity implements MenuItem.OnMen
                 .addMultipartParameter("change_user",session.getUserNIK())
                 .addMultipartParameter("presensi_status","00")
                 .addMultipartParameter("description","asd3")
-                .addMultipartFile("evidence",saveImage(CheckinActivity.this, ""))
+                .addMultipartFile("evidence",saveImage(CheckinActivity.this, "tyrt"))
                 .setPriority(Priority.MEDIUM)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -788,7 +787,7 @@ public class CheckinActivity extends AppCompatActivity implements MenuItem.OnMen
                 .addMultipartParameter("change_user",session.getUserNIK())
                 .addMultipartParameter("presensi_status","00")
                 .addMultipartParameter("description","wde3")
-                .addMultipartFile("evidence",saveImage(CheckinActivity.this, ""))
+                .addMultipartFile("evidence",saveImage(CheckinActivity.this, "sdfwe"))
                 .setPriority(Priority.MEDIUM)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {

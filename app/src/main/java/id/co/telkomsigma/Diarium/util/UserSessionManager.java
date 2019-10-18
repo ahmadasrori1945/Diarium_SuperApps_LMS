@@ -309,11 +309,11 @@ public class UserSessionManager {
     }
 
     public int getCountLMS(){
-        return pref.getInt("count_question", 0);
+        return pref.getInt("count_question_lms", 0);
     }
 
     public void setCountQuestion(int id){
-        editor.putInt("count_question_lms", id);
+        editor.putInt("count_question", id);
         editor.commit();
     }
 
@@ -548,6 +548,15 @@ public class UserSessionManager {
 
     public String getLatLon(){
         return pref.getString("latlon", "0");
+    }
+
+    public void setJawaban(String stat){
+        editor.putString("jawaban", stat);
+        editor.commit();
+    }
+
+    public String getJawaban(){
+        return pref.getString("jawaban", "-");
     }
 
     public void setStat(String stat){

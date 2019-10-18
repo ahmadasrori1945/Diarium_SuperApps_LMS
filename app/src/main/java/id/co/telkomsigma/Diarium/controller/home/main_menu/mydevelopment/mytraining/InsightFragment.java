@@ -486,7 +486,7 @@ public class InsightFragment extends Fragment {
         System.out.println("PARAMINSIGHT"+batch+owner+title+text+type+jamRes+tRes);
         AndroidNetworking.upload("https://testapi.digitalevent.id/lms/api/forum")
                 .addHeaders("Accept","application/json")
-                .addHeaders("Content-Type","application/json")
+                .addHeaders("Content-Type","multipart/form-data")
                 .addHeaders("Authorization","Bearer "+session.getTokenLdap())
                 .addMultipartParameter("business_code",session.getUserBusinessCode())
                 .addMultipartParameter("batch",batch)
@@ -494,8 +494,8 @@ public class InsightFragment extends Fragment {
                 .addMultipartParameter("forum_title",title)
                 .addMultipartParameter("forum_text",text)
                 .addMultipartParameter("forum_type",type)
-                .addMultipartParameter("forum_time",jamRes)
                 .addMultipartFile("forum_image", saveImage(getActivity(), img_data))
+                .addMultipartParameter("forum_time",jamRes)
                 .addMultipartParameter("begin_date",tRes)
                 .addMultipartParameter("end_date","9999-12-31")
                 .setPriority(Priority.MEDIUM)
@@ -516,6 +516,7 @@ public class InsightFragment extends Fragment {
                     @Override
                     public void onError(ANError error) {
                         progressDialogHelper.dismissProgressDialog(getActivity());
+                        Log.d(TAG, "onError response " + error.getResponse());
                         System.out.println("ccc"+error);
                     }
                 });
@@ -557,6 +558,7 @@ public class InsightFragment extends Fragment {
                 e.printStackTrace();
             }
         }
+        System.out.println("BENTUKFILE"+file);
         return file;
     }
 

@@ -56,14 +56,69 @@
                     android:orientation="vertical"
                     android:padding="5dp">
 
-                    <TextView
-                        android:id="@+id/question"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:orientation="horizontal"
+                        android:padding="3dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1.8"
+                            app:srcCompat="@drawable/information" />
+
+                        <TextView
+                            android:id="@+id/tvTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.2"
+                            android:gravity="top|left"
+                            android:text="Isi pertanyaan"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:orientation="horizontal"
+                        android:padding="3dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1.8"
+                            app:srcCompat="@drawable/attach" />
+
+                        <TextView
+                            android:id="@+id/tvText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.2"
+                            android:gravity="top|left"
+                            android:text="Isi pertanyaan"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="top|left"
-                        android:text="Isi pertanyaan"
-                        android:textSize="14sp" />
+                        android:padding="5dp"
+                        android:textStyle="bold"
+                        android:text="Choose the correct answer below:" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -84,11 +139,12 @@
                         <EditText
                             android:id="@+id/etEsay"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
+                            android:layout_height="200dp"
                             android:background="@drawable/bg_edittext"
                             android:ems="10"
+                            android:gravity="top"
                             android:hint="Input your answer"
-                            android:inputType="textPersonName"
+                            android:inputType="textMultiLine"
                             android:padding="5dp"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -112,6 +168,7 @@
                         android:layout_weight="0.8"
                         android:orientation="vertical">
                         <RadioGroup
+                            android:id="@+id/radioGroupTF"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <RadioButton
@@ -133,7 +190,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.4"
                         android:orientation="horizontal">
-
                         <Button
                             android:id="@+id/btnAction"
                             android:layout_width="match_parent"
