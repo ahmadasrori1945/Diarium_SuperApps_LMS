@@ -1,6 +1,7 @@
 package id.co.telkomsigma.Diarium.model;
 
 public class MentoringModel {
+    String mentoring_id;
     String title;
     String topic;
     String description;
@@ -8,13 +9,22 @@ public class MentoringModel {
     String begin_date;
     String end_date;
 
-    public MentoringModel(String title, String topic, String description, String duration, String begin_date, String end_date) {
+    public MentoringModel(String mentoring_id, String title, String topic, String description, String duration, String begin_date, String end_date) {
+        this.mentoring_id = mentoring_id;
         this.title = title;
         this.topic = topic;
         this.description = description;
         this.duration = duration;
         this.begin_date = begin_date;
         this.end_date = end_date;
+    }
+
+    public String getMentoring_id() {
+        return mentoring_id;
+    }
+
+    public void setMentoring_id(String mentoring_id) {
+        this.mentoring_id = mentoring_id;
     }
 
     public String getTitle() {

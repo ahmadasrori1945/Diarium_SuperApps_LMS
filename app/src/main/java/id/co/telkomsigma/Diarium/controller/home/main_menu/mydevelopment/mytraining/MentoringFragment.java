@@ -89,13 +89,14 @@ public class MentoringFragment extends Fragment {
                                 listEventSession.setVisibility(View.VISIBLE);
                                 for (int a = 0; a < response.length(); a++) {
                                     JSONObject object = response.getJSONObject(a);
+                                    String mentoring_id = object.getString("mentoring_id");
                                     String title = object.getString("title");
                                     String topic = object.getString("topic");
                                     String description = object.getString("description");
                                     String duration = object.getString("duration");
                                     String begin_date = object.getString("begin_date");
                                     String end_date = object.getString("end_date");
-                                    model = new MentoringModel(title,topic,description,duration,begin_date,end_date);
+                                    model = new MentoringModel(mentoring_id, title,topic,description,duration,begin_date,end_date);
                                     listModel.add(model);
                                 }
                                 adapter = new MentoringAdapter(getActivity(), listModel);
@@ -131,6 +132,7 @@ public class MentoringFragment extends Fragment {
                                         i.putExtra("title",listModel.get(position).getTitle());
                                         i.putExtra("topic",listModel.get(position).getTopic());
                                         i.putExtra("description",listModel.get(position).getDescription());
+                                        i.putExtra("mentoring_id",listModel.get(position).getMentoring_id());
                                         startActivity(i);
                                     }
                                 });

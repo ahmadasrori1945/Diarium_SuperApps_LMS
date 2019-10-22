@@ -21,6 +21,7 @@ import org.json.JSONObject;
 import id.co.telkomsigma.Diarium.R;
 import id.co.telkomsigma.Diarium.adapter.MenuAdapter;
 import id.co.telkomsigma.Diarium.controller.home.main_menu.mydevelopment.myknowledge.MyKnowledgeActivity;
+import id.co.telkomsigma.Diarium.controller.home.main_menu.mydevelopment.mytraining.MentoringActivity;
 import id.co.telkomsigma.Diarium.controller.home.main_menu.mytime.checkin.CheckinActivity;
 import id.co.telkomsigma.Diarium.controller.home.main_menu.community.CommunityActivity;
 import id.co.telkomsigma.Diarium.controller.home.main_menu.employee_care.EmployeeCareActivity;
@@ -324,49 +325,21 @@ public class SubMyTimeActivity extends AppCompatActivity {
                         Toast.makeText(SubMyTimeActivity.this, "This menu not available", Toast.LENGTH_SHORT).show();
                         break;
                     case "My Learning":
-                        i = new Intent(SubMyTimeActivity.this, MyTrainingActivity.class);
-                        startActivity(i);
+                        System.out.println("ROLENYA"+session.getRoleLMS());
+                        if (session.getRoleLMS().equals("MENTOR")) {
+                            i = new Intent(SubMyTimeActivity.this, MentoringActivity.class);
+                            startActivity(i);
+                        } else {
+                            i = new Intent(SubMyTimeActivity.this, MyTrainingActivity.class);
+                            startActivity(i);
+                        }
                         break;
                 }
             }
         });
-        getRoleLMS();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(code);
-    }
-
-
-    private void getRoleLMS(){
-        System.out.println("MASUKROLELMS");
-        AndroidNetworking.get(session.getServerURL()+"get_v_lms_userbuscd/nik/"+session.getUserNIK()+"/buscd/"+session.getUserBusinessCode())
-                .addHeaders("Accept","application/json")
-                .addHeaders("Content-Type","application/json")
-                .addHeaders("Authorization",session.getToken())
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        // do anything with response
-                        System.out.println("RESPONROLELMS"+response);
-                        try {
-                            JSONArray data = response.getJSONArray("data");
-                            for (int i=0;i<data.length();i++) {
-                                JSONObject object = data.getJSONObject(i);
-                                String role_code = object.getString("role_code");
-                                session.setRoleLMS(role_code);
-                            }
-                        }catch (Exception e){
-                            System.out.println(e);
-                        }
-
-                    }
-                    @Override
-                    public void onError(ANError error) {
-                        System.out.println(error);
-                    }
-                });
     }
 
     @Override

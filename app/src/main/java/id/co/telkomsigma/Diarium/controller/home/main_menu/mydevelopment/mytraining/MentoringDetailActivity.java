@@ -69,6 +69,7 @@ import id.co.telkomsigma.Diarium.util.photo.TakePhotoUtil;
 
 public class MentoringDetailActivity extends AppCompatActivity {
 
+    String  mentoring_id;
     String  bussines_code;
     String  batch;
     String  batch_name;
@@ -160,6 +161,7 @@ public class MentoringDetailActivity extends AppCompatActivity {
         ivInsight.setVisibility(View.GONE);
         btnSave.setVisibility(View.GONE);
         Intent intent = getIntent();
+        mentoring_id = intent.getStringExtra("mentoring_id");
         bussines_code = intent.getStringExtra("bussines_code");
         batch = intent.getStringExtra("batch");
         batch_name = intent.getStringExtra("batch_name");
@@ -238,7 +240,7 @@ public class MentoringDetailActivity extends AppCompatActivity {
                 }
             }
         });
-        getListComment();
+        getListComment(mentoring_id);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Mentoring Detail");
     }
@@ -644,7 +646,7 @@ public class MentoringDetailActivity extends AppCompatActivity {
                             btnSave.setVisibility(View.GONE);
                             adapter.notifyDataSetChanged();
                             etComment.setText("");
-                            getListComment();
+                            getListComment(mentoring_id);
 
                         }catch (Exception e){
                             System.out.println(e);
@@ -658,8 +660,8 @@ public class MentoringDetailActivity extends AppCompatActivity {
                 });
     }
 
-    private void getListComment(){
-        AndroidNetworking.get("https://testapi.digitalevent.id/lms/api/mentoringchat?mentoring_id=5")
+    private void getListComment(String mentoring_id){
+        AndroidNetworking.get("https://testapi.digitalevent.id/lms/api/mentoringchat?mentoring_id="+mentoring_id)
                 .addHeaders("Accept","application/json")
                 .addHeaders("Content-Type","application/json")
                 .addHeaders("Authorization","Bearer "+session.getTokenLdap())

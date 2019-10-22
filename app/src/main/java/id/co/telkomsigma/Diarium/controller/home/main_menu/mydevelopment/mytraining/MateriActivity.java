@@ -323,6 +323,7 @@ public class MateriActivity extends AppCompatActivity {
                                     @Override
                                     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                                         Intent i = new Intent(MateriActivity.this, KuisionerLMSActivity.class);
+                                        i.putExtra("template_code_id",listModelKuisioner.get(position).getTemplate_id());
                                         startActivity(i);
                                     }
                                 });

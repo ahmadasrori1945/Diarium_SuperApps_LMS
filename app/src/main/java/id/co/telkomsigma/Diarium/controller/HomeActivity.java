@@ -119,6 +119,7 @@ public class HomeActivity extends AppCompatActivity {
                         return true;
                     }
                 });
+        getRoleLMS();
 //        session.setCurrentDate("2015-01-06");
 //        getStatCheckin();
     }
@@ -142,9 +143,42 @@ public class HomeActivity extends AppCompatActivity {
             //No internet
         }
         checkVersion();
+        getRoleLMS();
 //        getStatCheckin();
         getAva();
         fragment = new HomeFragment();
+    }
+
+    private void getRoleLMS(){
+        System.out.println("MASUKROLELMS");
+        AndroidNetworking.get(session.getServerURL()+"get_v_lms_userbuscd/nik/"+session.getUserNIK()+"/buscd/"+session.getUserBusinessCode())
+                .addHeaders("Accept","application/json")
+                .addHeaders("Content-Type","application/json")
+                .addHeaders("Authorization",session.getToken())
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // do anything with response
+                        System.out.println("RESPONROLELMS"+response);
+                        try {
+                            JSONArray data = response.getJSONArray("data");
+                            for (int i=0;i<data.length();i++) {
+                                JSONObject object = data.getJSONObject(i);
+                                String role_code = object.getString("role_code");
+//                                session.setRoleLMS(role_code);
+                            }
+                            session.setRoleLMS("MENTOR");
+                        }catch (Exception e){
+                            System.out.println(e);
+                        }
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        System.out.println(error);
+                    }
+                });
     }
 
     public void apkDownloader(String url, String title){

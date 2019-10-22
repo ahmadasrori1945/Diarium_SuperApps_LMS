@@ -44,6 +44,7 @@ import id.co.telkomsigma.Diarium.R;
 import id.co.telkomsigma.Diarium.adapter.AnswerKuisionerAdapter;
 import id.co.telkomsigma.Diarium.adapter.SurveyAnswerAdapter;
 import id.co.telkomsigma.Diarium.controller.LoginActivity;
+import id.co.telkomsigma.Diarium.controller.home.main_menu.survey.DetailSurveyActivity;
 import id.co.telkomsigma.Diarium.controller.home.main_menu.survey.QuestionSurveyActivity;
 import id.co.telkomsigma.Diarium.controller.home.main_menu.survey.SurveyActivity;
 import id.co.telkomsigma.Diarium.controller.profile.ProfileActivity;
@@ -82,6 +83,8 @@ public class KuisionerLMSActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kuisioner_lms);
+        Intent intent = getIntent();
+        String template_code_id = intent.getStringExtra("template_code_id");
         listModel = new ArrayList<KuisionerLMSModel>();
         answer = new JSONArray();
         listJawabanEsay = new ArrayList<String>();
@@ -102,7 +105,7 @@ public class KuisionerLMSActivity extends AppCompatActivity {
         radioFalse = findViewById(R.id.radioFalse);
         rgTF = findViewById(R.id.radioGroupTF);
         listModelAnswer = new ArrayList<AnswerQuesionerLMSModel>();
-        getQuestion();
+        getQuestion(template_code_id);
         lay_multiple_choice.setVisibility(View.GONE);
         lay_true_false.setVisibility(View.GONE);
         lay_esay.setVisibility(View.GONE);
@@ -154,7 +157,7 @@ public class KuisionerLMSActivity extends AppCompatActivity {
                     tvPertanyaanKe.setText("Test "+(posisi+1)+" of "+session.getCountLMS());
                     tvText.setText(listModel.get(posisi).getQuesioner_text());
                     tvTitle.setText(listModel.get(posisi).getQuesioner_title());
-                    getAnswer(listModel.get(posisi).getQuesioner_type_value());
+                    getAnswer(listModel.get(posisi).getQuesioner_type_value(), listModel.get(posisi).getQuesioner_id());
                 }
             }
         });
@@ -162,10 +165,10 @@ public class KuisionerLMSActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Survey");
     }
 
-    private void getQuestion(){
+    private void getQuestion(String template_code_id){
         progressDialogHelper.showProgressDialog(KuisionerLMSActivity.this, "Getting data...");
         System.out.println("MASUKPERTANYAANLMS®");
-        AndroidNetworking.get("https://testapi.digitalevent.id/lms/api/lmsrelationobject?order[oid]=desc&object[]=1&table_code[]=QUESN&relation[]=Q001&otype[]=TPLCD&per_page=999&begin_date_lte=2019-10-17&end_date_gte=2019-10-17")
+        AndroidNetworking.get("https://testapi.digitalevent.id/lms/api/lmsrelationobject?order[oid]=desc&object[]="+template_code_id+"&table_code[]=QUESN&relation[]=Q001&otype[]=TPLCD&per_page=999&begin_date_lte=2019-10-17&end_date_gte=2019-10-17")
                 .addHeaders("Accept","application/json")
                 .addHeaders("Content-Type","application/json")
                 .addHeaders("Authorization","Bearer "+session.getTokenLdap())
@@ -179,21 +182,24 @@ public class KuisionerLMSActivity extends AppCompatActivity {
                         try {
                             JSONArray jsonArray = response.getJSONArray("data");
                             String quesioner_id = null,quesioner_text = null, quesioner_title = null, tipe = null;
-                            session.setCountLMS(jsonArray.length());
-                            for (int a = 0; a < jsonArray.length(); a++) {
-                                JSONObject object = jsonArray.getJSONObject(a);
-                                quesioner_id = object.getJSONObject("id").getString("quesioner_id");
-                                quesioner_text = object.getJSONObject("id").getString("quesioner_text");
-                                quesioner_title = object.getJSONObject("id").getString("quesioner_title");
-                                tipe = object.getJSONObject("id").getJSONObject("quesioner_type").getString("id");
-                                model = new KuisionerLMSModel(quesioner_id,quesioner_text,quesioner_title,tipe);
-                                listModel.add(model);
+                            if (jsonArray.length()==0) {
+                                popUpLogin();
+                            } else {
+                                session.setCountLMS(jsonArray.length());
+                                for (int a = 0; a < jsonArray.length(); a++) {
+                                    JSONObject object = jsonArray.getJSONObject(a);
+                                    quesioner_id = object.getJSONObject("id").getString("quesioner_id");
+                                    quesioner_text = object.getJSONObject("id").getString("quesioner_text");
+                                    quesioner_title = object.getJSONObject("id").getString("quesioner_title");
+                                    tipe = object.getJSONObject("id").getJSONObject("quesioner_type").getString("id");
+                                    model = new KuisionerLMSModel(quesioner_id,quesioner_text,quesioner_title,tipe);
+                                    listModel.add(model);
+                                }
+                                tvPertanyaanKe.setText("Test "+(posisi+1)+" of "+session.getCountLMS());
+                                tvText.setText(listModel.get(posisi).getQuesioner_text());
+                                tvTitle.setText(listModel.get(posisi).getQuesioner_title());
+                                getAnswer(listModel.get(posisi).getQuesioner_type_value(), listModel.get(posisi).getQuesioner_id());
                             }
-                            tvPertanyaanKe.setText("Test "+(posisi+1)+" of "+session.getCountLMS());
-                            tvText.setText(listModel.get(posisi).getQuesioner_text());
-                            tvTitle.setText(listModel.get(posisi).getQuesioner_title());
-                            getAnswer(listModel.get(posisi).getQuesioner_type_value());
-//                            posisi++;
                         }catch (Exception e){
                         }
                         progressDialogHelper.dismissProgressDialog(KuisionerLMSActivity.this);
@@ -206,9 +212,9 @@ public class KuisionerLMSActivity extends AppCompatActivity {
                 });
     }
 
-    private void getAnswer(String tipe){
+    private void getAnswer(String tipe, String id){
         progressDialogHelper.showProgressDialog(KuisionerLMSActivity.this, "Getting data...");
-        AndroidNetworking.get("https://testapi.digitalevent.id/lms/api/quesionerchoice?quesioner[]=1&per_page=999&begin_date_lte=2019-10-07&end_date_gte=2019-10-07")
+        AndroidNetworking.get("https://testapi.digitalevent.id/lms/api/quesionerchoice?quesioner[]="+id+"&per_page=999&begin_date_lte=2019-10-07&end_date_gte=2019-10-07")
                 .addHeaders("Accept","application/json")
                 .addHeaders("Content-Type","application/json")
                 .addHeaders("Authorization","Bearer "+session.getTokenLdap())
@@ -321,6 +327,27 @@ public class KuisionerLMSActivity extends AppCompatActivity {
                         System.out.println(error);
                     }
                 });
+    }
+
+    private void popUpLogin() {
+        final Dialog dialog = new Dialog(KuisionerLMSActivity.this);
+        dialog.setContentView(R.layout.no_kuisioner_question);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.gravity = Gravity.CENTER;
+        dialog.getWindow().setAttributes(lp);
+        dialog.setTitle("Input Code Here");
+        Button btnYes =(Button) dialog.findViewById(R.id.btnYes);
+        dialog.show();
+        dialog.setCancelable(false);
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 }

@@ -102,7 +102,7 @@ public class MyTrainingActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         // do anything with response
-                        System.out.println("RESPONTOKEN"+response);
+                        System.out.println("RESPONTOKENLDAPLMS"+response);
                         try {
                             String token_ldap = response.getString("access_token");
                             session.setTokenLdap(token_ldap);
