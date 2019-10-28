@@ -25,7 +25,7 @@
                 android:inputType="text"
                 android:padding="5dp"
                 android:layout_marginRight="5dp"
-                android:hint="input partner name">
+                android:hint="Search for...">
 
                 <requestFocus />
             </EditText>
@@ -42,10 +42,15 @@
             <!--/>-->
         </LinearLayout>
 
-        <ListView
-            android:id="@+id/listView1"
+        <GridView
+            android:id="@+id/gridview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </ListView>
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:horizontalSpacing="2dp"
+            android:isScrollContainer="false"
+            android:numColumns="2"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="2dp" />
+    </LinearLayout>>
     </LinearLayout>
-</LinearLayout>

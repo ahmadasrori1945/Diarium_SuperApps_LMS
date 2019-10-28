@@ -63,10 +63,10 @@ public class MentoringAdapter extends BaseAdapter {
         tvDate = view.findViewById(R.id.tvDate);
         tvTime = view.findViewById(R.id.tvTime);
 
-        tvScheduleName.setText(model.getTitle());
-        tvTopic.setText(model.getTopic());
-        tvDate.setText(model.getDescription());
-        tvTime.setText(model.getDuration());
+        tvScheduleName.setText("Title : "+model.getTitle());
+        tvTopic.setText("Topic : "+model.getTopic());
+        tvDate.setText("Description : "+model.getDescription());
+        tvTime.setText("Duration : "+model.getDuration());
 
         return view;
     }

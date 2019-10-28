@@ -101,7 +101,7 @@ public class MyKnowledgeActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_favorite) {
-            Intent intent = new Intent(MyKnowledgeActivity.this, HistorycornerActivity.class);
+            Intent intent = new Intent(MyKnowledgeActivity.this, SearchContentActivity.class);
             startActivity(intent);
         }
 
@@ -137,7 +137,6 @@ public class MyKnowledgeActivity extends AppCompatActivity {
                         }catch (Exception e){
                             System.out.println(e);
                         }
-
                     }
                     @Override
                     public void onError(ANError error) {

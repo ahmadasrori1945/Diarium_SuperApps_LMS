@@ -1,7 +1,6 @@
 package id.co.telkomsigma.Diarium.controller.home.main_menu.mydevelopment.mytraining;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -37,8 +36,6 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,49 +52,15 @@ import java.util.List;
 
 import id.co.telkomsigma.Diarium.R;
 import id.co.telkomsigma.Diarium.adapter.DetailMentoringAdapter;
-import id.co.telkomsigma.Diarium.adapter.ForumCommentAdapter;
-import id.co.telkomsigma.Diarium.adapter.ViewPagerAdapter;
-import id.co.telkomsigma.Diarium.controller.home.main_menu.today_activity.AddTodayActActivity;
-import id.co.telkomsigma.Diarium.controller.profile.DetailpostActivity;
 import id.co.telkomsigma.Diarium.model.DetailMentoringModel;
-import id.co.telkomsigma.Diarium.model.ForumCommentModel;
 import id.co.telkomsigma.Diarium.util.TimeHelper;
 import id.co.telkomsigma.Diarium.util.UserSessionManager;
 import id.co.telkomsigma.Diarium.util.element.ProgressDialogHelper;
 import id.co.telkomsigma.Diarium.util.photo.PhotoUtil;
 import id.co.telkomsigma.Diarium.util.photo.TakePhotoUtil;
 
-public class MentoringDetailActivity extends AppCompatActivity {
-
-    String  mentoring_id;
-    String  bussines_code;
-    String  batch;
-    String  batch_name;
-    String  event_id;
-    String  event_name;
-    String  begin_date;
-    String  end_date;
-    String  event_curr_stat;
-    String  evnt_curr_statid;
-    String  event_status;
-    String  event_stat_id;
-    String  location_id;
-    String  location;
-    String  cur_id;
-    String  curriculum;
-    String  event_type;
-    String  participant_id;
-    String  partcipant_name;
-    String  parti_nicknm;
-    String  company_name;
-    String  activity_name;
-    String  session_name;
-    String  begin_date_activity;
-    String  end_date_activity;
-    String  title;
-    String  topic;
-    String  description;
-    TextView tvEvent, tvBatch, tvLocation, tvType, tvCurriculum, tvDate, tvActivitName, tvSessionName, tvDateActivity, tvCompany;
+public class MentorMentoringDetailActivity extends AppCompatActivity {
+    String mentoring_id;
     TextView tvTitle, tvTopic, tvDescription, tvMentor;
     Button btnUpload, btnSave;
     ListView lvComment;
@@ -120,12 +83,11 @@ public class MentoringDetailActivity extends AppCompatActivity {
     private String userID;
     private Bitmap bitmapPhoto;
     ImageView ivInsight;
-
-    @SuppressLint({"SetTextI18n", "ClickableViewAccessibility"})
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mentoring_detail);
+        setContentView(R.layout.activity_mentor_mentoring_detail);
 
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
@@ -134,18 +96,8 @@ public class MentoringDetailActivity extends AppCompatActivity {
 
         progressDialogHelper = new ProgressDialogHelper();
         timeHelper = new TimeHelper();
-        font = Typeface.createFromAsset(MentoringDetailActivity.this.getAssets(),"fonts/Nexa Light.otf");
-        fontbold = Typeface.createFromAsset(MentoringDetailActivity.this.getAssets(),"fonts/Nexa Bold.otf");
-        tvEvent = findViewById(R.id.tvEvent);
-        tvBatch = findViewById(R.id.tvBatch);
-        tvLocation = findViewById(R.id.tvLocation);
-        tvType = findViewById(R.id.tvType);
-        tvCurriculum = findViewById(R.id.tvCurriculum);
-        tvDate = findViewById(R.id.tvDate);
-        tvActivitName = findViewById(R.id.tvActivityName);
-        tvSessionName = findViewById(R.id.tvSessionName);
-        tvDateActivity = findViewById(R.id.tvDateActivity);
-        tvCompany = findViewById(R.id.tvCompany);
+        font = Typeface.createFromAsset(MentorMentoringDetailActivity.this.getAssets(),"fonts/Nexa Light.otf");
+        fontbold = Typeface.createFromAsset(MentorMentoringDetailActivity.this.getAssets(),"fonts/Nexa Bold.otf");
         ivInsight = findViewById(R.id.ivInsight);
         session = new UserSessionManager(this);
 
@@ -163,53 +115,9 @@ public class MentoringDetailActivity extends AppCompatActivity {
         btnSave.setVisibility(View.GONE);
         Intent intent = getIntent();
         mentoring_id = intent.getStringExtra("mentoring_id");
-        bussines_code = intent.getStringExtra("bussines_code");
-        batch = intent.getStringExtra("batch");
-        batch_name = intent.getStringExtra("batch_name");
-        event_id = intent.getStringExtra("event_id");
-        event_name = intent.getStringExtra("event_name");
-        begin_date = intent.getStringExtra("begin_date");
-        end_date = intent.getStringExtra("end_date");
-        event_curr_stat = intent.getStringExtra("event_curr_stat");
-        evnt_curr_statid = intent.getStringExtra("evnt_curr_statid");
-        event_status = intent.getStringExtra("event_status");
-        event_stat_id = intent.getStringExtra("event_stat_id");
-        location_id = intent.getStringExtra("location_id");
-        location = intent.getStringExtra("location");
-        cur_id = intent.getStringExtra("cur_id");
-        curriculum = intent.getStringExtra("curriculum");
-        event_type = intent.getStringExtra("event_type");
-        participant_id = intent.getStringExtra("participant_id");
-        partcipant_name = intent.getStringExtra("partcipant_name");
-        parti_nicknm = intent.getStringExtra("parti_nicknm");
-        company_name = intent.getStringExtra("company_name");
-
-        activity_name = intent.getStringExtra("activity_name");
-        session_name = intent.getStringExtra("session_name");
-        begin_date_activity = intent.getStringExtra("begin_date_activity");
-        end_date_activity = intent.getStringExtra("end_date_activity");
-
-        title = intent.getStringExtra("title");
-        topic = intent.getStringExtra("topic");
-        description = intent.getStringExtra("description");
-
-        session.setactivity_nameLMS(activity_name);
-        session.setsession_nameLMS(session_name);
-        session.setbegin_date_activityLMS(begin_date_activity);
-        session.setend_date_activityLMS(end_date_activity);
-
-        tvEvent.setText(event_name);
-        tvBatch.setText(batch+ " "+ batch_name);
-        tvLocation.setText(location);
-        tvType.setText(event_type+" Event");
-        tvDate.setText(timeHelper.getTimeFormat(begin_date)+" - "+timeHelper.getTimeFormat(end_date));
-        tvEvent.setText(event_name);
-        tvCompany.setText(company_name+" - "+location_id);
-        tvCurriculum.setText(curriculum);
-
-        tvActivitName.setText(activity_name);
-        tvSessionName.setText(session_name);
-        tvDateActivity.setText(timeHelper.getTimeFormat(begin_date_activity)+" - "+timeHelper.getTimeFormat(end_date_activity));
+        String title = intent.getStringExtra("title");
+        String topic = intent.getStringExtra("topic");
+        String description = intent.getStringExtra("description");
 
         tvMentor.setText("Mentor : "+ "Mentor 1");
         tvTitle.setText("Title : "+ title);
@@ -235,9 +143,9 @@ public class MentoringDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String text = etComment.getText().toString();
                 if (text.isEmpty() || text.equals("")||text.length()==0) {
-                    Toast.makeText(MentoringDetailActivity.this, "Plase input comment first !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MentorMentoringDetailActivity.this, "Plase input comment first !", Toast.LENGTH_SHORT).show();
                 } else {
-                    submitTextMentoring(text);
+                    submitTextMentoring(text, mentoring_id);
                 }
             }
         });
@@ -310,7 +218,7 @@ public class MentoringDetailActivity extends AppCompatActivity {
 
     private void submitPost(String mentoring, String sender) {
         System.out.println("MASUKNEWINSIGHT");
-        progressDialogHelper.showProgressDialog(MentoringDetailActivity.this, "Sending data...");
+        progressDialogHelper.showProgressDialog(MentorMentoringDetailActivity.this, "Sending data...");
         @SuppressLint("SimpleDateFormat") SimpleDateFormat tgl = new SimpleDateFormat("yyyy-MM-dd");
         String tRes = tgl.format(new Date());
         @SuppressLint("SimpleDateFormat") SimpleDateFormat jam = new SimpleDateFormat("HH:mm");
@@ -324,7 +232,7 @@ public class MentoringDetailActivity extends AppCompatActivity {
                 .addMultipartParameter("sender_type","PARTI")
                 .addMultipartParameter("sender",sender)
                 .addMultipartParameter("otype","FILE")
-                .addMultipartFile("file_mentoring", saveImage(MentoringDetailActivity.this, img_data))
+                .addMultipartFile("file_mentoring", saveImage(MentorMentoringDetailActivity.this, img_data))
                 .setPriority(Priority.MEDIUM)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -333,16 +241,16 @@ public class MentoringDetailActivity extends AppCompatActivity {
                         // do anything with response
                         System.out.println(response+"RESPONNEWINSIGHT");
                         try {
-                            Toast.makeText(MentoringDetailActivity.this, response.getString("message"), Toast.LENGTH_SHORT).show();
-                            progressDialogHelper.dismissProgressDialog(MentoringDetailActivity.this);
+                            Toast.makeText(MentorMentoringDetailActivity.this, response.getString("message"), Toast.LENGTH_SHORT).show();
+                            progressDialogHelper.dismissProgressDialog(MentorMentoringDetailActivity.this);
                         }catch (Exception e){
-                            progressDialogHelper.dismissProgressDialog(MentoringDetailActivity.this);
+                            progressDialogHelper.dismissProgressDialog(MentorMentoringDetailActivity.this);
                             System.out.println("bbb"+e);
                         }
                     }
                     @Override
                     public void onError(ANError error) {
-                        progressDialogHelper.dismissProgressDialog(MentoringDetailActivity.this);
+                        progressDialogHelper.dismissProgressDialog(MentorMentoringDetailActivity.this);
                         Log.d(TAG, "onError response " + error.getResponse());
                         System.out.println("ccc"+error);
                     }
@@ -454,7 +362,7 @@ public class MentoringDetailActivity extends AppCompatActivity {
         Bitmap scaledBitmap = null;
         Uri selectedImageUri = data.getData();
         String[] projection = {MediaStore.MediaColumns.DATA};
-        CursorLoader cursorLoader = new CursorLoader(MentoringDetailActivity.this, selectedImageUri, projection, null, null, null);
+        CursorLoader cursorLoader = new CursorLoader(MentorMentoringDetailActivity.this, selectedImageUri, projection, null, null, null);
         Cursor cursor = cursorLoader.loadInBackground();
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
         cursor.moveToFirst();
@@ -557,7 +465,7 @@ public class MentoringDetailActivity extends AppCompatActivity {
 
     private void selectAction() {
         final CharSequence[] items = {"Capture Photo", "Choose from Gallery", "Cancel"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(MentoringDetailActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(MentorMentoringDetailActivity.this);
         builder.setTitle("Select Action");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
@@ -612,7 +520,7 @@ public class MentoringDetailActivity extends AppCompatActivity {
         return image;
     }
 
-    private void submitTextMentoring(String text) {
+    private void submitTextMentoring(String text, String id) {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat tgl = new SimpleDateFormat("yyyy-MM-dd");
         String tRes = tgl.format(new Date());
         @SuppressLint("SimpleDateFormat") SimpleDateFormat jamParam = new SimpleDateFormat("yyyMMddHHmmss");
@@ -620,7 +528,7 @@ public class MentoringDetailActivity extends AppCompatActivity {
         JSONObject obj = new JSONObject();
         try {
             obj.put("business_code", session.getUserBusinessCode());
-            obj.put("mentoring", "5");
+            obj.put("mentoring", id);
             obj.put("otype", "TEXT");
             obj.put("sender", "2");
             obj.put("sender_type", "PARTI");
@@ -642,7 +550,7 @@ public class MentoringDetailActivity extends AppCompatActivity {
                         // do anything with response
                         System.out.println(response+"RESPONSENDCHAT");
                         try {
-                                Toast.makeText(MentoringDetailActivity.this, response.getString("message"), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MentorMentoringDetailActivity.this, response.getString("message"), Toast.LENGTH_SHORT).show();
                             ivInsight.setVisibility(View.GONE);
                             btnSave.setVisibility(View.GONE);
                             adapter.notifyDataSetChanged();
@@ -684,17 +592,17 @@ public class MentoringDetailActivity extends AppCompatActivity {
                                 model = new DetailMentoringModel(begin_date,chat_text,sender_name);
                                 listModel.add(model);
                             }
-                            adapter = new DetailMentoringAdapter(MentoringDetailActivity.this, listModel);
+                            adapter = new DetailMentoringAdapter(MentorMentoringDetailActivity.this, listModel);
                             lvComment.setAdapter(adapter);
-                            progressDialogHelper.dismissProgressDialog(MentoringDetailActivity.this);
+                            progressDialogHelper.dismissProgressDialog(MentorMentoringDetailActivity.this);
                         }catch (Exception e){
-                            progressDialogHelper.dismissProgressDialog(MentoringDetailActivity.this);
+                            progressDialogHelper.dismissProgressDialog(MentorMentoringDetailActivity.this);
                             System.out.println(e);
                         }
                     }
                     @Override
                     public void onError(ANError error) {
-                        progressDialogHelper.dismissProgressDialog(MentoringDetailActivity.this);
+                        progressDialogHelper.dismissProgressDialog(MentorMentoringDetailActivity.this);
                         System.out.println(error);
                     }
                 });

@@ -75,8 +75,8 @@ public class MentoringActivity extends AppCompatActivity {
                                 for (int a = 0; a < jsonArray.length(); a++) {
                                     JSONObject object = jsonArray.getJSONObject(a);
                                     String mentoring_id = object.getJSONObject("mentoring").getString("mentoring_id");
-                                    String mentoring_title = object.getJSONObject("mentoring").getString("mentoring_id");
-                                    String mentoring_topic = object.getJSONObject("mentoring").getString("title");
+                                    String mentoring_title = object.getJSONObject("mentoring").getString("title");
+                                    String mentoring_topic = object.getJSONObject("mentoring").getString("topic");
                                     String mentoring_description = object.getJSONObject("mentoring").getString("description");
                                     String mentoring_duration = object.getJSONObject("mentoring").getString("duration");
                                     String mentoring_begin_date = object.getJSONObject("mentoring").getString("begin_date");
@@ -89,7 +89,7 @@ public class MentoringActivity extends AppCompatActivity {
                                 listEventSession.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                                        Intent i = new Intent(MentoringActivity.this, MentoringDetailActivity.class);
+                                        Intent i = new Intent(MentoringActivity.this, MentorMentoringDetailActivity.class);
                                         i.putExtra("title",listModel.get(position).getTitle());
                                         i.putExtra("topic",listModel.get(position).getTopic());
                                         i.putExtra("description",listModel.get(position).getDescription());

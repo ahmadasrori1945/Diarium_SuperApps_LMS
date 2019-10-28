@@ -101,8 +101,7 @@ public class MyPostingAdapter extends BaseAdapter {
                 mContext.startActivity(Intent.createChooser(sharingIntent, "Share via"));
             }
         });
-        Picasso.get().load(model.getImage()).resize(700, 700)
-                .error(R.drawable.placeholder_gallery).into(ivPost);
+//        Picasso.get().load(model.getImage()).resize(700, 700).error(R.drawable.placeholder_gallery).into(ivPost);
         Picasso.get().load(listModel.get(position).getAvatar()).error(R.drawable.profile).into(ivProfile);
         tvTitle.setText(listModel.get(position).getTitle());
         tvName.setText(listModel.get(position).getName());

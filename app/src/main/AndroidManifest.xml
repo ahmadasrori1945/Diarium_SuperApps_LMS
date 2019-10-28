@@ -15,6 +15,10 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:allowBackup">
         <activity
+            android:name=".controller.home.main_menu.mydevelopment.mytraining.MentorMentoringDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".controller.home.main_menu.mydevelopment.mytraining.MentoringActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />

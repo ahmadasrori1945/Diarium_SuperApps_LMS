@@ -167,9 +167,9 @@ public class HomeActivity extends AppCompatActivity {
                             for (int i=0;i<data.length();i++) {
                                 JSONObject object = data.getJSONObject(i);
                                 String role_code = object.getString("role_code");
-//                                session.setRoleLMS(role_code);
+                                session.setRoleLMS(role_code);
                             }
-                            session.setRoleLMS("MENTOR");
+//                            session.setRoleLMS("MENTOR");
                         }catch (Exception e){
                             System.out.println(e);
                         }

@@ -51,7 +51,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -423,7 +425,7 @@ public class InsightFragment extends Fragment {
         ivInsight.setVisibility(View.VISIBLE);
         bitmapPhoto = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
         img_data = photoUtil.getStringBase64Bitmap(scaledBitmap);
-        Log.d("GAMBER", "GAMBAR : " +img_data);
+        Log.d("GAMBER", "GAMBAR : " +bitmapPhoto);
         ivInsight.setImageBitmap(scaledBitmap);
 //        img_bg.setImageBitmap(scaledBitmap);
 //        img_ic.setVisibility(View.GONE);
@@ -558,7 +560,7 @@ public class InsightFragment extends Fragment {
                 e.printStackTrace();
             }
         }
-        System.out.println("BENTUKFILE"+file);
+        System.out.println("HASILFILE"+file);
         return file;
     }
 

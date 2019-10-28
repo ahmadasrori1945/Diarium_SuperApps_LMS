@@ -14,8 +14,14 @@
         android:text="No Data"
         android:textSize="30sp" />
 
-    <ListView
-        android:id="@+id/listOnGoing"
+    <GridView
+        android:id="@+id/gridview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:horizontalSpacing="2dp"
+        android:isScrollContainer="false"
+        android:numColumns="2"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="2dp" />
 </LinearLayout>
